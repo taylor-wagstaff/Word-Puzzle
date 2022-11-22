@@ -49,9 +49,12 @@ a {
   
  }
 
+
+
  input {
   width: 80px;
   height: 80px;
   font-size: 2rem;
   text-align: center;
+  text-transform: uppercase;
 }
