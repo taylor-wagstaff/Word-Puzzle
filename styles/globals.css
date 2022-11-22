@@ -24,3 +24,34 @@ a {
     background: black;
   }
 }
+
+
+
+
+.game-board{ 
+  display: grid;
+  grid-template-columns: 80px 80px 80px 80px 80px 80px; 
+  grid-template-rows: 80px 80px 80px 80px 80px 80px;
+  justify-content: center;
+  
+ }
+
+ .box {
+  background-color: lightgrey;
+  border: 2px solid black;
+ }
+
+ .letter {
+  margin-top: 1rem;
+  font-size: 2rem;
+  text-align: center;
+  
+  
+ }
+
+ input {
+  width: 80px;
+  height: 80px;
+  font-size: 2rem;
+  text-align: center;
+}
