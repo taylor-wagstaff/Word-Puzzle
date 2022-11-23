@@ -23,7 +23,7 @@ const getRandomWords = () => {
 
 export default function Home() {
   const [randomWord, setRandomWord] = useState([])
-  const [words, setWords] = useState([])
+  const [words, setWords] = useState(['', '', '', '', '', ''])
   const [start, setStart] = useState(false)
   const [letter, setLetter] = useState([
     '',
@@ -149,25 +149,113 @@ export default function Home() {
 
   //check if word is an actual word
   useEffect(() => {
+    // split letters into words
     sliceIntoChunks(letter)
     setStart(false)
-    // const wordOne = data[0]
-    // console.log(` this is wordOne ${wordOne}`)
-    console.log(` this is the words useState: ${words[0]}`)
-    fetchWords(words[0])
-      .then((res) => {
-        // console.log('its a word')
-        console.dir(res.body)
-      })
-      .finally(() => {
-        // console.log('word is checked')
-      })
-      .catch((err) => {
-        console.error(err.message)
-      })
-  }, [start])
 
-  // console.log(words)
+    // /[a-zA-Z]/g.test(word) && word.length === 6
+
+    console.log(` this is the words useState: ${words[0]}`)
+
+    if (/[a-zA-Z]/g.test(words[0]) && words[0].length === 6) {
+      fetchWords(words[0])
+        .then((res) => {
+          // console.log('its a word')
+          if (res.ok === true) {
+            console.log('response is a word')
+          }
+          console.dir(res.body)
+        })
+        .finally(() => {
+          // console.log('word is checked')
+        })
+        .catch((err) => {
+          console.error(err.message)
+        })
+    }
+    if (/[a-zA-Z]/g.test(words[1]) && words[1].length === 6) {
+      fetchWords(words[1])
+        .then((res) => {
+          // console.log('its a word')
+          if (res.ok === true) {
+            console.log('response is a word')
+          }
+          console.dir(res.body)
+        })
+        .finally(() => {
+          // console.log('word is checked')
+        })
+        .catch((err) => {
+          console.error(err.message)
+        })
+    }
+    if (/[a-zA-Z]/g.test(words[2]) && words[2].length === 6) {
+      fetchWords(words[2])
+        .then((res) => {
+          // console.log('its a word')
+          if (res.ok === true) {
+            console.log('response is a word')
+          }
+          console.dir(res.body)
+        })
+        .finally(() => {
+          // console.log('word is checked')
+        })
+        .catch((err) => {
+          console.error(err.message)
+        })
+    }
+    if (/[a-zA-Z]/g.test(words[3]) && words[3].length === 6) {
+      fetchWords(words[1])
+        .then((res) => {
+          // console.log('its a word')
+          if (res.ok === true) {
+            console.log('response is a word')
+          }
+          console.dir(res.body)
+        })
+        .finally(() => {
+          // console.log('word is checked')
+        })
+        .catch((err) => {
+          console.error(err.message)
+        })
+    }
+    if (/[a-zA-Z]/g.test(words[4]) && words[4].length === 6) {
+      fetchWords(words[1])
+        .then((res) => {
+          // console.log('its a word')
+          if (res.ok === true) {
+            console.log('response is a word')
+          }
+          console.dir(res.body)
+        })
+        .finally(() => {
+          // console.log('word is checked')
+        })
+        .catch((err) => {
+          console.error(err.message)
+        })
+    }
+    if (/[a-zA-Z]/g.test(words[5]) && words[5].length === 6) {
+      fetchWords(words[5])
+        .then((res) => {
+          // console.log('its a word')
+          if (res.ok === true) {
+            console.log('response is a word')
+          }
+          console.dir(res.body)
+        })
+        .finally(() => {
+          // console.log('word is checked')
+        })
+        .catch((err) => {
+          console.error(err.message)
+        })
+    } else {
+      console.log('not a word')
+    }
+  }, [start])
 
   return (
     <div className={styles.container}>
