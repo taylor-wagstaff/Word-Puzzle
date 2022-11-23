@@ -11,9 +11,9 @@ const getRandomWords = () => {
 }
 
 // To do:
-// make only letters in input
-// check each word with api from parts of array after each handlechange
-// change colour if word is correct
+// make only letters in input (unresolved)
+// check each word with api from parts of array after each handlechange (done)
+// change colour if word is correct (done)
 // conditions for letter going down and across then...
 // add points based on letter values to a point summary
 // change colour if letters go in certain directions
@@ -25,6 +25,13 @@ export default function Home() {
   const [randomWord, setRandomWord] = useState([])
   const [words, setWords] = useState(['', '', '', '', '', ''])
   const [start, setStart] = useState(false)
+  //styles for each word if correct
+  const [oneStyle, setOneStyle] = useState(false)
+  const [twoStyle, setTwoStyle] = useState(false)
+  const [threeStyle, setThreeStyle] = useState(false)
+  const [fourStyle, setFourStyle] = useState(false)
+  const [fiveStyle, setFiveStyle] = useState(false)
+  const [sixStyle, setSixStyle] = useState(false)
   const [letter, setLetter] = useState([
     '',
     '',
@@ -141,7 +148,10 @@ export default function Home() {
     const res = []
     const chunkSize = 6
     for (let i = 0; i < letter.length; i += chunkSize) {
-      const chunk = letter.slice(i, i + chunkSize).join('')
+      const chunk = letter
+        .slice(i, i + chunkSize)
+        .join('')
+        .toLowerCase()
       res.push(chunk)
     }
     return setWords(res)
@@ -161,8 +171,10 @@ export default function Home() {
       fetchWords(words[0])
         .then((res) => {
           // console.log('its a word')
-          if (res.ok === true) {
+          if (res.body[0].word === words[0]) {
             console.log('response is a word')
+           
+            setOneStyle(true)
           }
           console.dir(res.body)
         })
@@ -177,8 +189,9 @@ export default function Home() {
       fetchWords(words[1])
         .then((res) => {
           // console.log('its a word')
-          if (res.ok === true) {
+          if (res.body[0].word === words[1]) {
             console.log('response is a word')
+            setTwoStyle(true)
           }
           console.dir(res.body)
         })
@@ -193,8 +206,9 @@ export default function Home() {
       fetchWords(words[2])
         .then((res) => {
           // console.log('its a word')
-          if (res.ok === true) {
+          if (res.body[0].word === words[2]) {
             console.log('response is a word')
+            setThreeStyle(true)
           }
           console.dir(res.body)
         })
@@ -206,11 +220,12 @@ export default function Home() {
         })
     }
     if (/[a-zA-Z]/g.test(words[3]) && words[3].length === 6) {
-      fetchWords(words[1])
+      fetchWords(words[3])
         .then((res) => {
           // console.log('its a word')
-          if (res.ok === true) {
+          if (res.body[0].word === words[3]) {
             console.log('response is a word')
+            setFourStyle(true)
           }
           console.dir(res.body)
         })
@@ -222,11 +237,12 @@ export default function Home() {
         })
     }
     if (/[a-zA-Z]/g.test(words[4]) && words[4].length === 6) {
-      fetchWords(words[1])
+      fetchWords(words[4])
         .then((res) => {
           // console.log('its a word')
-          if (res.ok === true) {
+          if (res.body[0].word === words[4]) {
             console.log('response is a word')
+            setFiveStyle(true)
           }
           console.dir(res.body)
         })
@@ -241,8 +257,9 @@ export default function Home() {
       fetchWords(words[5])
         .then((res) => {
           // console.log('its a word')
-          if (res.ok === true) {
+          if (res.body[0].word === words[5]) {
             console.log('response is a word')
+            setSixStyle(true)
           }
           console.dir(res.body)
         })
@@ -273,6 +290,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={oneStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -282,6 +300,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={oneStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -291,6 +310,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={oneStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -300,6 +320,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={oneStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -309,6 +330,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={oneStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -322,6 +344,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={twoStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -331,6 +354,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={twoStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -340,6 +364,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={twoStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -349,6 +374,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={twoStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -358,6 +384,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={twoStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -371,6 +398,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={threeStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -380,6 +408,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={threeStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -389,6 +418,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={threeStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -398,6 +428,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={threeStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -407,6 +438,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={threeStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -420,6 +452,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={fourStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -429,6 +462,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={fourStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -438,6 +472,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={fourStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -447,6 +482,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={fourStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -456,6 +492,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={fourStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -469,6 +506,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={fiveStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -478,6 +516,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={fiveStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -487,6 +526,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={fiveStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -496,6 +536,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={fiveStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -505,6 +546,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={fiveStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -518,6 +560,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={sixStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -527,6 +570,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={sixStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -536,6 +580,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={sixStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -545,6 +590,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={sixStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
@@ -554,6 +600,7 @@ export default function Home() {
           </div>
           <div className="box">
             <input
+              style={sixStyle === true ? { color: 'blue' } : { color: 'red' }}
               id="letter"
               type="text"
               maxLength={1}
