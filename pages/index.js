@@ -4,7 +4,7 @@ import styles from '../styles/Home.module.css'
 import { useEffect, useState } from 'react'
 
 import { WORDS } from '../components/wordlist'
-
+import { fetchWords } from './api/dictionary'
 
 const getRandomWords = () => {
   return WORDS[Math.floor(Math.random() * WORDS.length)]
@@ -17,50 +17,51 @@ const getRandomWords = () => {
 // conditions for letter going down and across then...
 // add points based on letter values to a point summary
 // change colour if letters go in certain directions
+// Random word each date
 // add directions for gameplay
 // styling
 
-
 export default function Home() {
- 
   const [randomWord, setRandomWord] = useState([])
+  const [words, setWords] = useState([])
+  const [start, setStart] = useState(false)
   const [letter, setLetter] = useState([
-    '0',
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '10',
-    '11',
-    '12',
-    '13',
-    '14',
-    '15',
-    '16',
-    '17',
-    '18',
-    '19',
-    '20',
-    '21',
-    '22',
-    '23',
-    '24',
-    '25',
-    '26',
-    '27',
-    '28',
-    '29',
-    '30',
-    '31',
-    '32',
-    '33',
-    '34',
-    '35',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
   ])
 
   // random word
@@ -73,75 +74,45 @@ export default function Home() {
     setRandomWord(newWord)
     setLetter([
       splitWord[0],
-      '1',
-      '2',
-      '3',
-      '4',
-      '5',
+      '',
+      '',
+      '',
+      '',
+      '',
       splitWord[1],
-      '7',
-      '8',
-      '9',
-      '10',
-      '11',
+      '',
+      '',
+      '',
+      '',
+      '',
       splitWord[2],
-      '13',
-      '14',
-      '15',
-      '16',
-      '17',
+      '',
+      '',
+      '',
+      '',
+      '',
       splitWord[3],
-      '19',
-      '20',
-      '21',
-      '22',
-      '23',
+      '',
+      '',
+      '',
+      '',
+      '',
       splitWord[4],
-      '25',
-      '26',
-      '27',
-      '28',
-      '29',
+      '',
+      '',
+      '',
+      '',
+      '',
       splitWord[5],
-      '31',
-      '32',
-      '33',
-      '34',
-      '35',
+      '',
+      '',
+      '',
+      '',
+      '',
     ])
-    //removing postion from array
-
-    //  replace items with newWord at postion remove
-
-    // const replacedSet = letter.map((letters, index) => {
-    //   const splitWord = newWord.split('')
-    //   const remove = [0, 6, 12, 18, 24, 30]
-
-    //   console.log(`this is letters: ${splitWord}`)
-    //   console.log(`this is index of each letter: ${index}`)
-
-    //   if ((index === 0, 6, 12, 18, 24, 30)) {
-    //     console.log('conditions met')
-
-    //     const newLetterList = [
-    //       // Items before the insertion point:
-    //       ...letter.slice(0, index),
-    //       // New item:
-    //       splitWord,
-    //       // Items after the insertion point:
-    //       ...letter.slice(index),
-    //     ]
-
-    //     setLetter(newLetterList)
-    //   } else {
-    //     // The rest haven't changed
-    //     return letters
-    //   }
-    // })
-    // console.log(letter)
   }
 
-  // Add letter
+  // Add letter to the array
   const handleChange = (event, param1) => {
     const regex = /^[a-zA-Z]+$/
     const result = event.target.value
@@ -151,28 +122,52 @@ export default function Home() {
       letter.splice(param1, 1)
       // new array insert at its position
       setLetter([...letter.slice(0, param1), result, ...letter.slice(param1)])
-      console.log(param1)
-
+      setStart(true)
       // check if word matches after each state change
     }
   }
 
   // Backspace
-  const onKeyDown = (event) => {
-    // const array = [...letter]
-    // const result = event.target.value
-    // const regex = /^[a-zA-Z]+$/
-    // const index = array.indexOf(event.target.value)
-    // if (event.keyCode === 8 && result.match(regex)) {
-    //   setLetter([...letter.slice(0, index), ...letter.slice(index)])
-    // }
-  }
+  const onKeyDown = (event) => {}
 
   function log() {
-    return console.log(letter)
+    return [...letter.join('')]
   }
 
   log()
+
+  //slice array into individual words
+  const sliceIntoChunks = async () => {
+    const res = []
+    const chunkSize = 6
+    for (let i = 0; i < letter.length; i += chunkSize) {
+      const chunk = letter.slice(i, i + chunkSize).join('')
+      res.push(chunk)
+    }
+    return setWords(res)
+  }
+
+  //check if word is an actual word
+  useEffect(() => {
+    sliceIntoChunks(letter)
+    setStart(false)
+    // const wordOne = data[0]
+    // console.log(` this is wordOne ${wordOne}`)
+    console.log(` this is the words useState: ${words[0]}`)
+    fetchWords(words[0])
+      .then((res) => {
+        // console.log('its a word')
+        console.dir(res.body)
+      })
+      .finally(() => {
+        // console.log('word is checked')
+      })
+      .catch((err) => {
+        console.error(err.message)
+      })
+  }, [start])
+
+  // console.log(words)
 
   return (
     <div className={styles.container}>
