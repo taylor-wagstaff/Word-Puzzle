@@ -38,8 +38,8 @@ a {
  }
 
  .box {
-  background-color:  #7efa82;;
-  border: 2px solid lightgrey;
+  background-color:  #7efa82;
+  border: 1px solid lightgrey;
  }
 
  .letter {
@@ -53,11 +53,12 @@ a {
 
 
  input {
-  width: 80px;
-  height: 80px;
+  width: 79px;
+  height: 79px;
   font-size: 2rem;
   text-align: center;
   text-transform: uppercase;
+  border: 0;
   
   
 }

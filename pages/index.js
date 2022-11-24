@@ -80,37 +80,37 @@ export default function Home() {
 
     setRandomWord(newWord)
     setLetter([
-      splitWord[0],
+      splitWord[0].toLowerCase(),
       '',
       '',
       '',
       '',
       '',
-      splitWord[1],
+      splitWord[1].toLowerCase(),
       '',
       '',
       '',
       '',
       '',
-      splitWord[2],
+      splitWord[2].toLowerCase(),
       '',
       '',
       '',
       '',
       '',
-      splitWord[3],
+      splitWord[3].toLowerCase(),
       '',
       '',
       '',
       '',
       '',
-      splitWord[4],
+      splitWord[4].toLowerCase(),
       '',
       '',
       '',
       '',
       '',
-      splitWord[5],
+      splitWord[5].toLowerCase(),
       '',
       '',
       '',
@@ -130,18 +130,28 @@ export default function Home() {
       // new array insert at its position
       setLetter([...letter.slice(0, param1), result, ...letter.slice(param1)])
       setStart(true)
+      console.log(letter)
+      diagonal(letter)
       // check if word matches after each state change
     }
   }
 
-  // Backspace
-  const onKeyDown = (event) => {}
+  // check values for diagonal
+  const diagonal = async (letter) => {
+    const indexes = []
 
-  function log() {
-    return [...letter.join('')]
+    for (let index = 0; index < letter.length; index++) {
+      if (letter[index] === 'x') {
+        // push it to the indexes at where it occurs
+        indexes.push(index)
+      }
+    }
+
+    console.log(indexes)
   }
 
-  log()
+  // Backspace
+  const onKeyDown = (event) => {}
 
   //slice array into individual words
   const sliceIntoChunks = async () => {
@@ -163,17 +173,13 @@ export default function Home() {
     sliceIntoChunks(letter)
     setStart(false)
 
-    // /[a-zA-Z]/g.test(word) && word.length === 6
-
-    console.log(` this is the words useState: ${words[0]}`)
-
     if (/[a-zA-Z]/g.test(words[0]) && words[0].length === 6) {
       fetchWords(words[0])
         .then((res) => {
           // console.log('its a word')
           if (res.body[0].word === words[0]) {
             console.log('response is a word')
-           
+
             setOneStyle(true)
           }
           console.dir(res.body)
@@ -289,20 +295,32 @@ export default function Home() {
             <div className="letter">{randomWord[0]}</div>
           </div>
           <div className="box">
-            <input
-              style={oneStyle === true ? { color: 'blue' } : { color: 'red' }}
-              id="letter"
-              type="text"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 1)}
-              onKeyDown={(event) => onKeyDown(event, 1)}
-            ></input>
+            <div>
+              <input
+                style={
+                  oneStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 1)}
+                onKeyDown={(event) => onKeyDown(event, 1)}
+              ></input>
+            </div>
           </div>
           <div className="box">
             <input
-              style={oneStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                oneStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 2)}
               onKeyDown={(event) => onKeyDown(event, 2)}
@@ -310,9 +328,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={oneStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                oneStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 3)}
               onKeyDown={(event) => onKeyDown(event, 3)}
@@ -320,9 +343,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={oneStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                oneStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 4)}
               onKeyDown={(event) => onKeyDown(event, 4)}
@@ -330,9 +358,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={oneStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                oneStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 5)}
               onKeyDown={(event) => onKeyDown(event, 5)}
@@ -344,9 +377,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={twoStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                twoStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 7)}
               onKeyDown={(event) => onKeyDown(event, 7)}
@@ -354,9 +392,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={twoStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                twoStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 8)}
               onKeyDown={(event) => onKeyDown(event, 8)}
@@ -364,9 +407,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={twoStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                twoStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 9)}
               onKeyDown={(event) => onKeyDown(event, 9)}
@@ -374,9 +422,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={twoStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                twoStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 10)}
               onKeyDown={(event) => onKeyDown(event, 10)}
@@ -384,9 +437,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={twoStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                twoStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 11)}
               onKeyDown={(event) => onKeyDown(event, 11)}
@@ -398,9 +456,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={threeStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                threeStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 13)}
               onKeyDown={(event) => onKeyDown(event, 13)}
@@ -408,9 +471,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={threeStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                threeStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 14)}
               onKeyDown={(event) => onKeyDown(event, 14)}
@@ -418,9 +486,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={threeStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                threeStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 15)}
               onKeyDown={(event) => onKeyDown(event, 15)}
@@ -428,9 +501,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={threeStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                threeStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 16)}
               onKeyDown={(event) => onKeyDown(event, 16)}
@@ -438,9 +516,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={threeStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                threeStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 17)}
               onKeyDown={(event) => onKeyDown(event, 17)}
@@ -452,9 +535,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={fourStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                fourStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 19)}
               onKeyDown={(event) => onKeyDown(event, 19)}
@@ -462,9 +550,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={fourStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                fourStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 20)}
               onKeyDown={(event) => onKeyDown(event, 20)}
@@ -472,9 +565,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={fourStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                fourStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 21)}
               onKeyDown={(event) => onKeyDown(event, 21)}
@@ -482,9 +580,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={fourStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                fourStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 22)}
               onKeyDown={(event) => onKeyDown(event, 22)}
@@ -492,9 +595,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={fourStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                fourStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 23)}
               onKeyDown={(event) => onKeyDown(event, 23)}
@@ -506,9 +614,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={fiveStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                fiveStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 25)}
               onKeyDown={(event) => onKeyDown(event, 25)}
@@ -516,9 +629,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={fiveStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                fiveStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 26)}
               onKeyDown={(event) => onKeyDown(event, 26)}
@@ -526,9 +644,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={fiveStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                fiveStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 27)}
               onKeyDown={(event) => onKeyDown(event, 27)}
@@ -536,9 +659,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={fiveStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                fiveStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 28)}
               onKeyDown={(event) => onKeyDown(event, 28)}
@@ -546,9 +674,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={fiveStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                fiveStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 29)}
               onKeyDown={(event) => onKeyDown(event, 29)}
@@ -560,9 +693,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={sixStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                sixStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 31)}
               onKeyDown={(event) => onKeyDown(event, 31)}
@@ -570,9 +708,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={sixStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                sixStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 32)}
               onKeyDown={(event) => onKeyDown(event, 32)}
@@ -580,9 +723,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={sixStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                sixStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 33)}
               onKeyDown={(event) => onKeyDown(event, 33)}
@@ -590,9 +738,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={sixStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                sixStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 34)}
               onKeyDown={(event) => onKeyDown(event, 34)}
@@ -600,9 +753,14 @@ export default function Home() {
           </div>
           <div className="box">
             <input
-              style={sixStyle === true ? { color: 'blue' } : { color: 'red' }}
+              style={
+                sixStyle === true
+                  ? { backgroundColor: '#7efa82' }
+                  : { color: 'red' }
+              }
               id="letter"
               type="text"
+              autoComplete="off"
               maxLength={1}
               onChange={(event) => handleChange(event, 35)}
               onKeyDown={(event) => onKeyDown(event, 35)}
