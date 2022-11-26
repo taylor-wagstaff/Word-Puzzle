@@ -17,9 +17,12 @@ const getRandomWords = () => {
 // conditions for letter going down and across then...
 // add points based on letter values to a point summary
 // change colour if letters go in certain directions
+
 // Random word each date
 // add directions for gameplay
 // styling
+
+// Fix first word has to be different and cant use same two words, if change correct word back to red text.
 
 export default function Home() {
   const [randomWord, setRandomWord] = useState([])
@@ -32,6 +35,7 @@ export default function Home() {
   const [fourStyle, setFourStyle] = useState(false)
   const [fiveStyle, setFiveStyle] = useState(false)
   const [sixStyle, setSixStyle] = useState(false)
+
   const [letter, setLetter] = useState([
     '',
     '',
@@ -125,13 +129,15 @@ export default function Home() {
     const result = event.target.value
 
     if (result.match(regex)) {
-      // remove letter at postion, only one
-      letter.splice(param1, 1)
+      // // remove letter at postion, only one
+      ;[...letter.splice(param1, 1)]
       // new array insert at its position
       setLetter([...letter.slice(0, param1), result, ...letter.slice(param1)])
       setStart(true)
-      console.log(letter)
+      // console.log(letter)
+
       diagonal(letter)
+
       // check if word matches after each state change
     }
   }
@@ -141,17 +147,14 @@ export default function Home() {
     const indexes = []
 
     for (let index = 0; index < letter.length; index++) {
-      if (letter[index] === 'x') {
+      if (letter[index] === 'x' || letter[index] === 'u') {
         // push it to the indexes at where it occurs
         indexes.push(index)
       }
     }
 
-    console.log(indexes)
+    // console.log(indexes)
   }
-
-  // Backspace
-  const onKeyDown = (event) => {}
 
   //slice array into individual words
   const sliceIntoChunks = async () => {
@@ -164,6 +167,7 @@ export default function Home() {
         .toLowerCase()
       res.push(chunk)
     }
+    console.log(res)
     return setWords(res)
   }
 
@@ -172,6 +176,7 @@ export default function Home() {
     // split letters into words
     sliceIntoChunks(letter)
     setStart(false)
+    console.log(words[0].length)
 
     if (/[a-zA-Z]/g.test(words[0]) && words[0].length === 6) {
       fetchWords(words[0])
@@ -182,6 +187,7 @@ export default function Home() {
 
             setOneStyle(true)
           }
+
           console.dir(res.body)
         })
         .finally(() => {
@@ -280,14 +286,66 @@ export default function Home() {
     }
   }, [start])
 
+  // Backspace
+  const onKeyDown = (event, param2) => {
+    const empty = ''
+    if (event.key === 'Backspace') {
+      // remove letter at postion, only one
+      ;[...letter.splice(param2, 1, empty)]
+      // new array insert at its position
+      setLetter([...letter])
+      // setStart(true)
+
+      // colorCheck(letter)
+      colorCheck(letter)
+    }
+
+    // check if word matches after each state change
+  }
+
+  const colorCheck = (letter) => {
+    const empty = ''
+    console.log(letter)
+    switch (empty) {
+      case letter[5]:
+        setOneStyle(false)
+        break
+      case letter[11]:
+        setTwoStyle(false)
+        break
+      case letter[17]:
+        setThreeStyle(false)
+        break
+      case letter[23]:
+        setFourStyle(false)
+        break
+      case letter[29]:
+        setFiveStyle(false)
+        break
+      case letter[35]:
+        setSixStyle(false)
+        break
+      default:
+      // execute default code block
+    }
+  }
+
+  function log() {
+    console.log(letter)
+  }
+
+  log()
+
   return (
     <div className={styles.container}>
       <Head>
-        <title>Word Game!</title>
-        <meta name="word game" />
+        <title>AcrossIt!</title>
+        <meta name="AcrossIt :)" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
+      <div>
+        <h2>AcrossIt</h2>
+      </div>
       <div className="container">
         <div className="game-board">
           <div className="box">
@@ -296,6 +354,7 @@ export default function Home() {
           </div>
           <div className="box">
             <div>
+              {/* two letter */}
               <input
                 style={
                   oneStyle === true
@@ -312,6 +371,7 @@ export default function Home() {
             </div>
           </div>
           <div className="box">
+            {/* three letter */}
             <input
               style={
                 oneStyle === true
@@ -327,6 +387,7 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
+            {/* four letter */}
             <input
               style={
                 oneStyle === true
@@ -342,6 +403,7 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
+            {/* five letter */}
             <input
               style={
                 oneStyle === true
@@ -357,6 +419,7 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
+            {/* six letter */}
             <input
               style={
                 oneStyle === true
@@ -372,10 +435,11 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
-            {/* second letter */}
+            {/* seven letter */}
             <div className="letter">{randomWord[1]}</div>
           </div>
           <div className="box">
+            {/* eight letter */}
             <input
               style={
                 twoStyle === true
@@ -391,6 +455,7 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
+            {/* nine letter */}
             <input
               style={
                 twoStyle === true
@@ -406,6 +471,7 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
+            {/* tenth letter */}
             <input
               style={
                 twoStyle === true
@@ -421,6 +487,7 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
+            {/* eleventh letter */}
             <input
               style={
                 twoStyle === true
@@ -436,6 +503,7 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
+            {/* 12 letter */}
             <input
               style={
                 twoStyle === true
@@ -451,10 +519,11 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
-            {/* third letter */}
+            {/* 13 letter */}
             <div className="letter">{randomWord[2]}</div>
           </div>
           <div className="box">
+            {/* 14 letter */}
             <input
               style={
                 threeStyle === true
@@ -470,6 +539,7 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
+            {/* 15 letter */}
             <input
               style={
                 threeStyle === true
@@ -485,6 +555,7 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
+            {/* 16 letter */}
             <input
               style={
                 threeStyle === true
@@ -500,6 +571,7 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
+            {/* 17 letter */}
             <input
               style={
                 threeStyle === true
@@ -515,6 +587,7 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
+            {/* 18 letter */}
             <input
               style={
                 threeStyle === true
@@ -530,10 +603,11 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
-            {/* fourth letter */}
+            {/* 19 letter */}
             <div className="letter">{randomWord[3]}</div>
           </div>
           <div className="box">
+            {/* 20 letter */}
             <input
               style={
                 fourStyle === true
@@ -549,6 +623,7 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
+            {/* 21 letter */}
             <input
               style={
                 fourStyle === true
@@ -564,6 +639,7 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
+            {/* 22 letter */}
             <input
               style={
                 fourStyle === true
@@ -579,6 +655,7 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
+            {/* 23 letter */}
             <input
               style={
                 fourStyle === true
@@ -594,6 +671,7 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
+            {/* 24 letter */}
             <input
               style={
                 fourStyle === true
@@ -609,10 +687,11 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
-            {/* fifth letter */}
+            {/* 25 letter */}
             <div className="letter">{randomWord[4]}</div>
           </div>
           <div className="box">
+            {/* 26 letter */}
             <input
               style={
                 fiveStyle === true
@@ -628,6 +707,7 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
+            {/* 27 letter */}
             <input
               style={
                 fiveStyle === true
@@ -643,6 +723,7 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
+            {/* 28 letter */}
             <input
               style={
                 fiveStyle === true
@@ -658,6 +739,7 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
+            {/* 29 letter */}
             <input
               style={
                 fiveStyle === true
@@ -673,6 +755,7 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
+            {/* 30 letter */}
             <input
               style={
                 fiveStyle === true
@@ -688,10 +771,11 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
-            {/* six letter */}
+            {/* 31 letter */}
             <div className="letter">{randomWord[5]}</div>
           </div>
           <div className="box">
+            {/* 32 letter */}
             <input
               style={
                 sixStyle === true
@@ -707,6 +791,7 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
+            {/* 33 letter */}
             <input
               style={
                 sixStyle === true
@@ -722,6 +807,7 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
+            {/* 34 letter */}
             <input
               style={
                 sixStyle === true
@@ -737,6 +823,7 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
+            {/* 35 letter */}
             <input
               style={
                 sixStyle === true
@@ -752,6 +839,7 @@ export default function Home() {
             ></input>
           </div>
           <div className="box">
+            {/* 36 letter */}
             <input
               style={
                 sixStyle === true
@@ -770,7 +858,7 @@ export default function Home() {
         <div></div>
       </div>
       <button type="button" className={styles.button} onClick={handleClick}>
-        Generate
+        New Word
       </button>
     </div>
   )

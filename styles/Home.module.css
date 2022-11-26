@@ -1,5 +1,9 @@
 .container {
   padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .main {
@@ -130,7 +134,8 @@
 
 .button {
   background-color: #7efa82;/* Green */
-  margin-top: 3rem;
+  margin-top: 2rem;
+  margin-bottom: 5rem;
   border: none;
   color: white;
   padding: 15px 32px;
