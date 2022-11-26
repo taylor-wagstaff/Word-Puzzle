@@ -134,11 +134,8 @@ export default function Home() {
       // new array insert at its position
       setLetter([...letter.slice(0, param1), result, ...letter.slice(param1)])
       setStart(true)
-      // console.log(letter)
 
       diagonal(letter)
-
-      // check if word matches after each state change
     }
   }
 
@@ -167,7 +164,7 @@ export default function Home() {
         .toLowerCase()
       res.push(chunk)
     }
-    console.log(res)
+
     return setWords(res)
   }
 
@@ -176,7 +173,6 @@ export default function Home() {
     // split letters into words
     sliceIntoChunks(letter)
     setStart(false)
-    console.log(words[0].length)
 
     if (/[a-zA-Z]/g.test(words[0]) && words[0].length === 6) {
       fetchWords(words[0])
@@ -294,33 +290,109 @@ export default function Home() {
       ;[...letter.splice(param2, 1, empty)]
       // new array insert at its position
       setLetter([...letter])
-      // setStart(true)
 
-      // colorCheck(letter)
       colorCheck(letter)
     }
-
-    // check if word matches after each state change
   }
 
   const colorCheck = (letter) => {
     const empty = ''
-    console.log(letter)
+
     switch (empty) {
+      case letter[1]:
+        setOneStyle(false)
+        break
+      case letter[2]:
+        setOneStyle(false)
+        break
+      case letter[3]:
+        setOneStyle(false)
+        break
+      case letter[4]:
+        setOneStyle(false)
+        break
       case letter[5]:
         setOneStyle(false)
         break
+      case letter[7]:
+        setTwoStyle(false)
+        break
+      case letter[8]:
+        setTwoStyle(false)
+        break
+      case letter[9]:
+        setTwoStyle(false)
+        break
+
+      case letter[10]:
+        setTwoStyle(false)
+        break
+
       case letter[11]:
         setTwoStyle(false)
+        break
+
+      case letter[13]:
+        setThreeStyle(false)
+        break
+      case letter[14]:
+        setThreeStyle(false)
+        break
+      case letter[15]:
+        setThreeStyle(false)
+        break
+
+      case letter[16]:
+        setThreeStyle(false)
         break
       case letter[17]:
         setThreeStyle(false)
         break
+
+      case letter[19]:
+        setFourStyle(false)
+        break
+      case letter[20]:
+        setFourStyle(false)
+        break
+      case letter[21]:
+        setFourStyle(false)
+        break
+
+      case letter[22]:
+        setFourStyle(false)
+        break
       case letter[23]:
         setFourStyle(false)
         break
+      case letter[25]:
+        setFiveStyle(false)
+        break
+      case letter[26]:
+        setFiveStyle(false)
+        break
+      case letter[27]:
+        setFiveStyle(false)
+        break
+      case letter[28]:
+        setFiveStyle(false)
+        break
       case letter[29]:
         setFiveStyle(false)
+        break
+
+      case letter[31]:
+        setSixStyle(false)
+        break
+
+      case letter[32]:
+        setSixStyle(false)
+        break
+      case letter[33]:
+        setSixStyle(false)
+        break
+      case letter[34]:
+        setSixStyle(false)
         break
       case letter[35]:
         setSixStyle(false)
