@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Image from 'next/image'
 
 import styles from '../styles/Home.module.css'
 import { useEffect, useState } from 'react'
@@ -14,6 +15,7 @@ const getRandomWords = () => {
 // make only letters in input (unresolved)
 // check each word with api from parts of array after each handlechange (done)
 // change colour if word is correct (done)
+// Fix first word has to be different (done)
 // conditions for letter going down and across then...
 // add points based on letter values to a point summary
 // change colour if letters go in certain directions
@@ -21,8 +23,6 @@ const getRandomWords = () => {
 // Random word each date
 // add directions for gameplay
 // styling
-
-// Fix first word has to be different and cant use same two words, if change correct word back to red text.
 
 export default function Home() {
   const [randomWord, setRandomWord] = useState([])
@@ -80,6 +80,7 @@ export default function Home() {
     // shuffle array and pick random
 
     const newWord = getRandomWords()
+    // split letters to enter into array
     const splitWord = newWord.split('')
 
     setRandomWord(newWord)
@@ -130,27 +131,18 @@ export default function Home() {
 
     if (result.match(regex)) {
       // // remove letter at postion, only one
-      ;[...letter.splice(param1, 1)]
+      // setLetter([...letter.splice(param1, 1)])
+      // // new array insert at its position
+      // setLetter([...letter.slice(0, param1), result, ...letter.slice(param1)])
+
+      ;[...letter.splice(param1, 1, event.target.value)]
       // new array insert at its position
-      setLetter([...letter.slice(0, param1), result, ...letter.slice(param1)])
+      setLetter([...letter])
+
       setStart(true)
 
       diagonal(letter)
     }
-  }
-
-  // check values for diagonal
-  const diagonal = async (letter) => {
-    const indexes = []
-
-    for (let index = 0; index < letter.length; index++) {
-      if (letter[index] === 'x' || letter[index] === 'u') {
-        // push it to the indexes at where it occurs
-        indexes.push(index)
-      }
-    }
-
-    // console.log(indexes)
   }
 
   //slice array into individual words
@@ -174,7 +166,11 @@ export default function Home() {
     sliceIntoChunks(letter)
     setStart(false)
 
-    if (/[a-zA-Z]/g.test(words[0]) && words[0].length === 6) {
+    if (
+      /[a-zA-Z]/g.test(words[0]) &&
+      words[0].length === 6 &&
+      words[0] !== randomWord.toLowerCase()
+    ) {
       fetchWords(words[0])
         .then((res) => {
           // console.log('its a word')
@@ -182,6 +178,8 @@ export default function Home() {
             console.log('response is a word')
 
             setOneStyle(true)
+          } else {
+            setOneStyle(false)
           }
 
           console.dir(res.body)
@@ -200,6 +198,8 @@ export default function Home() {
           if (res.body[0].word === words[1]) {
             console.log('response is a word')
             setTwoStyle(true)
+          } else {
+            setTwoStyle(false)
           }
           console.dir(res.body)
         })
@@ -217,6 +217,8 @@ export default function Home() {
           if (res.body[0].word === words[2]) {
             console.log('response is a word')
             setThreeStyle(true)
+          } else {
+            setThreeStyle(false)
           }
           console.dir(res.body)
         })
@@ -234,6 +236,8 @@ export default function Home() {
           if (res.body[0].word === words[3]) {
             console.log('response is a word')
             setFourStyle(true)
+          } else {
+            setFourStyle(false)
           }
           console.dir(res.body)
         })
@@ -251,6 +255,8 @@ export default function Home() {
           if (res.body[0].word === words[4]) {
             console.log('response is a word')
             setFiveStyle(true)
+          } else {
+            setFiveStyle(false)
           }
           console.dir(res.body)
         })
@@ -268,6 +274,8 @@ export default function Home() {
           if (res.body[0].word === words[5]) {
             console.log('response is a word')
             setSixStyle(true)
+          } else {
+            setSixStyle(false)
           }
           console.dir(res.body)
         })
@@ -285,6 +293,7 @@ export default function Home() {
   // Backspace
   const onKeyDown = (event, param2) => {
     const empty = ''
+
     if (event.key === 'Backspace') {
       // remove letter at postion, only one
       ;[...letter.splice(param2, 1, empty)]
@@ -401,12 +410,45 @@ export default function Home() {
       // execute default code block
     }
   }
+  // check values for diagonal
+  const diagonal = async (letter) => {
+    const indexes = []
+    const letterIndex = []
+    const repeatedChar = []
 
-  function log() {
     console.log(letter)
+
+    const set = new Set(letter)
+
+    // Characters that repeat
+    const duplicates = letter.filter((item) => {
+      if (set.has(item)) {
+        set.delete(item)
+      } else {
+        return item
+      }
+    })
+
+    repeatedChar.push(duplicates)
+
+    console.log(repeatedChar)
+
+    //Indexes of all letters
+    for (let index = 0; index < letter.length; index++) {
+      if (/[a-zA-Z]/.test(letter[index])) {
+        // push it to the indexes at where it occurs
+        indexes.push(index)
+      }
+    }
+
+    console.log(indexes)
   }
 
-  log()
+  // function log() {
+  //   console.log(letter)
+  // }
+
+  // log()
 
   return (
     <div className={styles.container}>
@@ -415,6 +457,9 @@ export default function Home() {
         <meta name="AcrossIt :)" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      {/* <div className="logo">
+        <Image src="/acrossitblack.jpg" alt="logo" width={180} height={50} />
+      </div> */}
       <div>
         <h2>AcrossIt</h2>
       </div>
@@ -929,9 +974,19 @@ export default function Home() {
         </div>
         <div></div>
       </div>
-      <button type="button" className={styles.button} onClick={handleClick}>
-        New Word
-      </button>
+      <div>
+        <button
+          type="button"
+          className={styles.button}
+          onClick={() => window.location.reload(false)}
+        >
+          NEW GAME
+        </button>
+        <button type="button" className={styles.button} onClick={handleClick}>
+          NEW WORD
+        </button>
+      </div>
+      <div></div>
     </div>
   )
 }
