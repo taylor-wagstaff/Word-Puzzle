@@ -37,6 +37,10 @@ export default function Home() {
   const [fiveStyle, setFiveStyle] = useState(false)
   const [sixStyle, setSixStyle] = useState(false)
 
+  // setscore
+
+  const [score, setScore] = useState(0)
+
   const [letter, setLetter] = useState([
     '',
     '',
@@ -141,8 +145,11 @@ export default function Home() {
       setLetter([...letter])
 
       setStart(true)
+
       // perform connection function for matching
-      connects(letter)
+      const fetchScore = connects(letter)
+
+      setScore(fetchScore)
     }
   }
 
@@ -238,8 +245,6 @@ export default function Home() {
       ;[...letter.splice(param2, 1, empty)]
       // new array insert at its position
       setLetter([...letter])
-
-      colorCheck(letter)
     }
   }
 
@@ -349,45 +354,6 @@ export default function Home() {
       // execute default code block
     }
   }
-  // check values for diagonal
-  // const diagonal = async (letter) => {
-  //   const indexes = []
-  //   const letterIndex = []
-  //   const repeatedChar = []
-
-  //   console.log(letter)
-
-  //   const set = new Set(letter)
-
-  //   // Characters that repeat
-  //   const duplicates = letter.filter((item) => {
-  //     if (set.has(item)) {
-  //       set.delete(item)
-  //     } else {
-  //       return item
-  //     }
-  //   })
-
-  //   repeatedChar.push(duplicates)
-
-  //   console.log(repeatedChar)
-
-  //   //Indexes of all letters
-  //   for (let index = 0; index < letter.length; index++) {
-  //     if (/[a-zA-Z]/.test(letter[index])) {
-  //       // push it to the indexes at where it occurs
-  //       indexes.push(index)
-  //     }
-  //   }
-
-  //   console.log(indexes)
-  // }
-
-  // function log() {
-  //   console.log(letter)
-  // }
-
-  // log()
 
   return (
     <div className={styles.container}>
@@ -401,6 +367,9 @@ export default function Home() {
       </div> */}
       <div className="header">
         <h2>AcrossIt</h2>
+      </div>
+      <div className="score">
+        <p>Score: {score}</p>
       </div>
       <div className="container">
         <div className="game-board">
@@ -925,7 +894,6 @@ export default function Home() {
           NEW WORD
         </button>
       </div>
-      <div></div>
     </div>
   )
 }

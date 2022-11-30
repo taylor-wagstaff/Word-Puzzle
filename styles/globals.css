@@ -32,7 +32,7 @@ a {
 
 
 .game-board{ 
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
   display: grid;
   grid-template-columns: 80px 80px 80px 80px 80px 80px; 
   grid-template-rows: 80px 80px 80px 80px 80px 80px;
@@ -68,3 +68,11 @@ a {
   
   
 }
+
+.score {
+  
+  font-size: 11px;
+  text-align: center;
+  
+  
+ }
