@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 
 import { WORDS } from '../components/wordlist'
 import { fetchWords } from './api/dictionary'
+import { connects } from '../components/connects'
 
 const getRandomWords = () => {
   return WORDS[Math.floor(Math.random() * WORDS.length)]
@@ -140,8 +141,8 @@ export default function Home() {
       setLetter([...letter])
 
       setStart(true)
-
-      diagonal(letter)
+      // perform connection function for matching
+      connects(letter)
     }
   }
 
@@ -171,120 +172,58 @@ export default function Home() {
       words[0].length === 6 &&
       words[0] !== randomWord.toLowerCase()
     ) {
-      fetchWords(words[0])
-        .then((res) => {
-          // console.log('its a word')
-          if (res.body[0].word === words[0]) {
-            console.log('response is a word')
-
-            setOneStyle(true)
-          } else {
-            setOneStyle(false)
-          }
-
-          console.dir(res.body)
-        })
-        .finally(() => {
-          // console.log('word is checked')
-        })
-        .catch((err) => {
-          console.error(err.message)
-        })
+      let firstWord = words[0]
+      // fetchWords(words[0])
+      if (fetchWords(firstWord)) {
+        setOneStyle(true)
+      } else {
+        setOneStyle(false)
+      }
     }
     if (/[a-zA-Z]/g.test(words[1]) && words[1].length === 6) {
-      fetchWords(words[1])
-        .then((res) => {
-          // console.log('its a word')
-          if (res.body[0].word === words[1]) {
-            console.log('response is a word')
-            setTwoStyle(true)
-          } else {
-            setTwoStyle(false)
-          }
-          console.dir(res.body)
-        })
-        .finally(() => {
-          // console.log('word is checked')
-        })
-        .catch((err) => {
-          console.error(err.message)
-        })
+      let secondWord = words[1]
+      // fetchWords(words[0])
+      if (fetchWords(secondWord)) {
+        setTwoStyle(true)
+      } else {
+        setTwoStyle(false)
+      }
     }
     if (/[a-zA-Z]/g.test(words[2]) && words[2].length === 6) {
-      fetchWords(words[2])
-        .then((res) => {
-          // console.log('its a word')
-          if (res.body[0].word === words[2]) {
-            console.log('response is a word')
-            setThreeStyle(true)
-          } else {
-            setThreeStyle(false)
-          }
-          console.dir(res.body)
-        })
-        .finally(() => {
-          // console.log('word is checked')
-        })
-        .catch((err) => {
-          console.error(err.message)
-        })
+      let thirdWord = words[2]
+      // fetchWords(words[0])
+      if (fetchWords(thirdWord)) {
+        setThreeStyle(true)
+      } else {
+        setThreeStyle(false)
+      }
     }
     if (/[a-zA-Z]/g.test(words[3]) && words[3].length === 6) {
-      fetchWords(words[3])
-        .then((res) => {
-          // console.log('its a word')
-          if (res.body[0].word === words[3]) {
-            console.log('response is a word')
-            setFourStyle(true)
-          } else {
-            setFourStyle(false)
-          }
-          console.dir(res.body)
-        })
-        .finally(() => {
-          // console.log('word is checked')
-        })
-        .catch((err) => {
-          console.error(err.message)
-        })
+      let fourWord = words[3]
+      // fetchWords(words[0])
+      if (fetchWords(fourWord)) {
+        setFourStyle(true)
+      } else {
+        setFourStyle(false)
+      }
     }
     if (/[a-zA-Z]/g.test(words[4]) && words[4].length === 6) {
-      fetchWords(words[4])
-        .then((res) => {
-          // console.log('its a word')
-          if (res.body[0].word === words[4]) {
-            console.log('response is a word')
-            setFiveStyle(true)
-          } else {
-            setFiveStyle(false)
-          }
-          console.dir(res.body)
-        })
-        .finally(() => {
-          // console.log('word is checked')
-        })
-        .catch((err) => {
-          console.error(err.message)
-        })
+      let fiveWord = words[4]
+
+      if (fetchWords(fiveWord)) {
+        setFiveStyle(true)
+      } else {
+        setFiveStyle(false)
+      }
     }
     if (/[a-zA-Z]/g.test(words[5]) && words[5].length === 6) {
-      fetchWords(words[5])
-        .then((res) => {
-          // console.log('its a word')
-          if (res.body[0].word === words[5]) {
-            console.log('response is a word')
-            setSixStyle(true)
-          } else {
-            setSixStyle(false)
-          }
-          console.dir(res.body)
-        })
-        .finally(() => {
-          // console.log('word is checked')
-        })
-        .catch((err) => {
-          console.error(err.message)
-        })
+      let sixWord = words[5]
+
+      if (fetchWords(sixWord)) {
+        setSixStyle(true)
+      } else {
+        setSixStyle(false)
+      }
     } else {
       console.log('not a word')
     }
@@ -411,38 +350,38 @@ export default function Home() {
     }
   }
   // check values for diagonal
-  const diagonal = async (letter) => {
-    const indexes = []
-    const letterIndex = []
-    const repeatedChar = []
+  // const diagonal = async (letter) => {
+  //   const indexes = []
+  //   const letterIndex = []
+  //   const repeatedChar = []
 
-    console.log(letter)
+  //   console.log(letter)
 
-    const set = new Set(letter)
+  //   const set = new Set(letter)
 
-    // Characters that repeat
-    const duplicates = letter.filter((item) => {
-      if (set.has(item)) {
-        set.delete(item)
-      } else {
-        return item
-      }
-    })
+  //   // Characters that repeat
+  //   const duplicates = letter.filter((item) => {
+  //     if (set.has(item)) {
+  //       set.delete(item)
+  //     } else {
+  //       return item
+  //     }
+  //   })
 
-    repeatedChar.push(duplicates)
+  //   repeatedChar.push(duplicates)
 
-    console.log(repeatedChar)
+  //   console.log(repeatedChar)
 
-    //Indexes of all letters
-    for (let index = 0; index < letter.length; index++) {
-      if (/[a-zA-Z]/.test(letter[index])) {
-        // push it to the indexes at where it occurs
-        indexes.push(index)
-      }
-    }
+  //   //Indexes of all letters
+  //   for (let index = 0; index < letter.length; index++) {
+  //     if (/[a-zA-Z]/.test(letter[index])) {
+  //       // push it to the indexes at where it occurs
+  //       indexes.push(index)
+  //     }
+  //   }
 
-    console.log(indexes)
-  }
+  //   console.log(indexes)
+  // }
 
   // function log() {
   //   console.log(letter)
@@ -460,7 +399,7 @@ export default function Home() {
       {/* <div className="logo">
         <Image src="/acrossitblack.jpg" alt="logo" width={180} height={50} />
       </div> */}
-      <div>
+      <div className="header">
         <h2>AcrossIt</h2>
       </div>
       <div className="container">

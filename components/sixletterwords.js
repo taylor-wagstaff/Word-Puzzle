@@ -15788,14 +15788,3 @@ let sixletterwords = [
   'ZYGOTE',
   'ZYMASE',
 ]
-
-export function fetchWords(word) {
-  let wordUpper = word.toUpperCase()
-
-  let wordIsValid = false
-
-  if (sixletterwords.indexOf(wordUpper) > -1) {
-    wordIsValid = true
-  }
-  return wordIsValid
-}
