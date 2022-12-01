@@ -146,10 +146,23 @@ export default function Home() {
 
       setStart(true)
 
+      colorCheck(...letter)
       // perform connection function for matching
       const fetchScore = connects(letter)
 
       setScore(fetchScore)
+    }
+  }
+  // Backspace
+  const onKeyDown = (event, param2) => {
+    const empty = ''
+
+    if (event.key === 'Backspace') {
+      // remove letter at postion, only one
+      ;[...letter.splice(param2, 1, empty)]
+      // new array insert at its position
+      setLetter([...letter])
+      colorCheck(...letter)
     }
   }
 
@@ -171,7 +184,7 @@ export default function Home() {
   //check if word is an actual word
   useEffect(() => {
     // split letters into words
-    sliceIntoChunks(letter)
+    sliceIntoChunks(...letter)
     setStart(false)
 
     if (
@@ -236,18 +249,6 @@ export default function Home() {
     }
   }, [start])
 
-  // Backspace
-  const onKeyDown = (event, param2) => {
-    const empty = ''
-
-    if (event.key === 'Backspace') {
-      // remove letter at postion, only one
-      ;[...letter.splice(param2, 1, empty)]
-      // new array insert at its position
-      setLetter([...letter])
-    }
-  }
-
   const colorCheck = (letter) => {
     const empty = ''
 
@@ -276,15 +277,12 @@ export default function Home() {
       case letter[9]:
         setTwoStyle(false)
         break
-
       case letter[10]:
         setTwoStyle(false)
         break
-
       case letter[11]:
         setTwoStyle(false)
         break
-
       case letter[13]:
         setThreeStyle(false)
         break
@@ -294,14 +292,12 @@ export default function Home() {
       case letter[15]:
         setThreeStyle(false)
         break
-
       case letter[16]:
         setThreeStyle(false)
         break
       case letter[17]:
         setThreeStyle(false)
         break
-
       case letter[19]:
         setFourStyle(false)
         break
@@ -311,7 +307,6 @@ export default function Home() {
       case letter[21]:
         setFourStyle(false)
         break
-
       case letter[22]:
         setFourStyle(false)
         break
@@ -333,11 +328,9 @@ export default function Home() {
       case letter[29]:
         setFiveStyle(false)
         break
-
       case letter[31]:
         setSixStyle(false)
         break
-
       case letter[32]:
         setSixStyle(false)
         break
