@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Image from 'next/image'
 
 import styles from '../styles/Home.module.css'
 import { useEffect, useState } from 'react'
@@ -358,8 +357,8 @@ export default function Home() {
   return (
     <div>
       <a
-        class="tweetbutton"
-        href={`https://twitter.com/intent/tweet?text=${words}`}
+        className="tweetbutton"
+        href={`https://twitter.com/intent/tweet?text=%5B${words}%5D%20%5BScore:%20${score}%5D`}
       >
         Tweet
       </a>
@@ -371,7 +370,7 @@ export default function Home() {
         </Head>
 
         <div className="header">
-          <h2>AcrossIt</h2>
+          <h1>AcrossIt</h1>
         </div>
         <div className="score">
           <p>Score: {score}</p>
@@ -901,10 +900,6 @@ export default function Home() {
         </div>
         <div className="rules-container">
           <p>HOW TO PLAY:</p>
-          <br></br>
-          <br></br>
-          <p>A</p>
-          <p>&nbsp;A</p>
         </div>
       </div>
     </div>

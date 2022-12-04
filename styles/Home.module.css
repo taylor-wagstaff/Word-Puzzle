@@ -1,5 +1,5 @@
 .container {
-  padding: 0 2rem;
+  /* padding: 0 0rem; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -101,11 +101,7 @@
   font-size: 1.5rem;
 }
 
-.card p {
-  margin: 0;
-  font-size: 1.25rem;
-  line-height: 1.5;
-}
+
 
 .logo {
   height: 1em;
