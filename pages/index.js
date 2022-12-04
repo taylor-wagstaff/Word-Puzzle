@@ -17,8 +17,8 @@ const getRandomWords = () => {
 // check each word with api from parts of array after each handlechange (done)
 // change colour if word is correct (done)
 // Fix first word has to be different (done)
-// conditions for letter going down and across then...
-// add points based on letter values to a point summary
+// conditions for letter going down and across then (done)
+// add points based on letter values to a point summary (done)
 // change colour if letters go in certain directions
 
 // Random word each date
@@ -29,6 +29,8 @@ export default function Home() {
   const [randomWord, setRandomWord] = useState([])
   const [words, setWords] = useState(['', '', '', '', '', ''])
   const [start, setStart] = useState(false)
+  const [backspace, setBackspace] = useState(false)
+
   //styles for each word if correct
   const [oneStyle, setOneStyle] = useState(false)
   const [twoStyle, setTwoStyle] = useState(false)
@@ -135,14 +137,10 @@ export default function Home() {
     const result = event.target.value
 
     if (result.match(regex)) {
-      // // remove letter at postion, only one
-      // setLetter([...letter.splice(param1, 1)])
-      // // new array insert at its position
-      // setLetter([...letter.slice(0, param1), result, ...letter.slice(param1)])
-
       ;[...letter.splice(param1, 1, event.target.value)]
       // new array insert at its position
       setLetter([...letter])
+      sliceIntoChunks(letter)
 
       setStart(true)
 
@@ -161,8 +159,16 @@ export default function Home() {
       // remove letter at postion, only one
       ;[...letter.splice(param2, 1, empty)]
       // new array insert at its position
+
+      const fetchScore = connects(letter)
+
+      setScore(fetchScore)
+
+      setBackspace(true)
       setLetter([...letter])
-      colorCheck(...letter)
+      sliceIntoChunks(letter)
+      colorCheck(letter)
+      console.log('backsapce letter', letter)
     }
   }
 
@@ -184,9 +190,10 @@ export default function Home() {
   //check if word is an actual word
   useEffect(() => {
     // split letters into words
-    sliceIntoChunks(...letter)
+    // sliceIntoChunks(letter)
     setStart(false)
-
+    setBackspace(false)
+    console.log('words', words)
     if (
       /[a-zA-Z]/g.test(words[0]) &&
       words[0].length === 6 &&
@@ -196,61 +203,61 @@ export default function Home() {
       // fetchWords(words[0])
       if (fetchWords(firstWord)) {
         setOneStyle(true)
-      } else {
-        setOneStyle(false)
       }
+    } else {
+      setOneStyle(false)
     }
     if (/[a-zA-Z]/g.test(words[1]) && words[1].length === 6) {
       let secondWord = words[1]
       // fetchWords(words[0])
       if (fetchWords(secondWord)) {
         setTwoStyle(true)
-      } else {
-        setTwoStyle(false)
       }
+    } else {
+      setTwoStyle(false)
     }
     if (/[a-zA-Z]/g.test(words[2]) && words[2].length === 6) {
       let thirdWord = words[2]
       // fetchWords(words[0])
       if (fetchWords(thirdWord)) {
         setThreeStyle(true)
-      } else {
-        setThreeStyle(false)
       }
+    } else {
+      setThreeStyle(false)
     }
     if (/[a-zA-Z]/g.test(words[3]) && words[3].length === 6) {
       let fourWord = words[3]
       // fetchWords(words[0])
       if (fetchWords(fourWord)) {
+        console.log('fourWord', fourWord)
         setFourStyle(true)
-      } else {
-        setFourStyle(false)
       }
+    } else {
+      setFourStyle(false)
     }
     if (/[a-zA-Z]/g.test(words[4]) && words[4].length === 6) {
       let fiveWord = words[4]
 
       if (fetchWords(fiveWord)) {
         setFiveStyle(true)
-      } else {
-        setFiveStyle(false)
       }
+    } else {
+      setFiveStyle(false)
     }
     if (/[a-zA-Z]/g.test(words[5]) && words[5].length === 6) {
       let sixWord = words[5]
 
       if (fetchWords(sixWord)) {
         setSixStyle(true)
-      } else {
-        setSixStyle(false)
       }
     } else {
-      console.log('not a word')
+      setSixStyle(false)
     }
-  }, [start])
+  }, [start, backspace])
 
-  const colorCheck = (letter) => {
+  function colorCheck(letter) {
     const empty = ''
+    console.log(letter)
 
     switch (empty) {
       case letter[1]:
@@ -349,30 +356,52 @@ export default function Home() {
   }
 
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>AcrossIt!</title>
-        <meta name="AcrossIt :)" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      {/* <div className="logo">
-        <Image src="/acrossitblack.jpg" alt="logo" width={180} height={50} />
-      </div> */}
-      <div className="header">
-        <h2>AcrossIt</h2>
-      </div>
-      <div className="score">
-        <p>Score: {score}</p>
-      </div>
-      <div className="container">
-        <div className="game-board">
-          <div className="box">
-            {/* frist letter */}
-            <div className="letter">{randomWord[0]}</div>
-          </div>
-          <div className="box">
-            <div>
-              {/* two letter */}
+    <div>
+      <a
+        class="tweetbutton"
+        href={`https://twitter.com/intent/tweet?text=${words}`}
+      >
+        Tweet
+      </a>
+      <div className={styles.container}>
+        <Head>
+          <title>AcrossIt!</title>
+          <meta name="AcrossIt :)" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+
+        <div className="header">
+          <h2>AcrossIt</h2>
+        </div>
+        <div className="score">
+          <p>Score: {score}</p>
+        </div>
+        <div className="container">
+          <div className="game-board">
+            <div className="box">
+              {/* frist letter */}
+              <div className="letter">{randomWord[0]}</div>
+            </div>
+            <div className="box">
+              <div>
+                {/* two letter */}
+                <input
+                  style={
+                    oneStyle === true
+                      ? { backgroundColor: '#7efa82' }
+                      : { color: 'red' }
+                  }
+                  id="letter"
+                  type="text"
+                  autoComplete="off"
+                  maxLength={1}
+                  onChange={(event) => handleChange(event, 1)}
+                  onKeyDown={(event) => onKeyDown(event, 1)}
+                ></input>
+              </div>
+            </div>
+            <div className="box">
+              {/* three letter */}
               <input
                 style={
                   oneStyle === true
@@ -383,509 +412,500 @@ export default function Home() {
                 type="text"
                 autoComplete="off"
                 maxLength={1}
-                onChange={(event) => handleChange(event, 1)}
-                onKeyDown={(event) => onKeyDown(event, 1)}
+                onChange={(event) => handleChange(event, 2)}
+                onKeyDown={(event) => onKeyDown(event, 2)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* four letter */}
+              <input
+                style={
+                  oneStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 3)}
+                onKeyDown={(event) => onKeyDown(event, 3)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* five letter */}
+              <input
+                style={
+                  oneStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 4)}
+                onKeyDown={(event) => onKeyDown(event, 4)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* six letter */}
+              <input
+                style={
+                  oneStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 5)}
+                onKeyDown={(event) => onKeyDown(event, 5)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* seven letter */}
+              <div className="letter">{randomWord[1]}</div>
+            </div>
+            <div className="box">
+              {/* eight letter */}
+              <input
+                style={
+                  twoStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 7)}
+                onKeyDown={(event) => onKeyDown(event, 7)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* nine letter */}
+              <input
+                style={
+                  twoStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 8)}
+                onKeyDown={(event) => onKeyDown(event, 8)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* tenth letter */}
+              <input
+                style={
+                  twoStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 9)}
+                onKeyDown={(event) => onKeyDown(event, 9)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* eleventh letter */}
+              <input
+                style={
+                  twoStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 10)}
+                onKeyDown={(event) => onKeyDown(event, 10)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* 12 letter */}
+              <input
+                style={
+                  twoStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 11)}
+                onKeyDown={(event) => onKeyDown(event, 11)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* 13 letter */}
+              <div className="letter">{randomWord[2]}</div>
+            </div>
+            <div className="box">
+              {/* 14 letter */}
+              <input
+                style={
+                  threeStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 13)}
+                onKeyDown={(event) => onKeyDown(event, 13)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* 15 letter */}
+              <input
+                style={
+                  threeStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 14)}
+                onKeyDown={(event) => onKeyDown(event, 14)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* 16 letter */}
+              <input
+                style={
+                  threeStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 15)}
+                onKeyDown={(event) => onKeyDown(event, 15)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* 17 letter */}
+              <input
+                style={
+                  threeStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 16)}
+                onKeyDown={(event) => onKeyDown(event, 16)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* 18 letter */}
+              <input
+                style={
+                  threeStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 17)}
+                onKeyDown={(event) => onKeyDown(event, 17)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* 19 letter */}
+              <div className="letter">{randomWord[3]}</div>
+            </div>
+            <div className="box">
+              {/* 20 letter */}
+              <input
+                style={
+                  fourStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 19)}
+                onKeyDown={(event) => onKeyDown(event, 19)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* 21 letter */}
+              <input
+                style={
+                  fourStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 20)}
+                onKeyDown={(event) => onKeyDown(event, 20)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* 22 letter */}
+              <input
+                style={
+                  fourStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 21)}
+                onKeyDown={(event) => onKeyDown(event, 21)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* 23 letter */}
+              <input
+                style={
+                  fourStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 22)}
+                onKeyDown={(event) => onKeyDown(event, 22)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* 24 letter */}
+              <input
+                style={
+                  fourStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 23)}
+                onKeyDown={(event) => onKeyDown(event, 23)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* 25 letter */}
+              <div className="letter">{randomWord[4]}</div>
+            </div>
+            <div className="box">
+              {/* 26 letter */}
+              <input
+                style={
+                  fiveStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 25)}
+                onKeyDown={(event) => onKeyDown(event, 25)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* 27 letter */}
+              <input
+                style={
+                  fiveStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 26)}
+                onKeyDown={(event) => onKeyDown(event, 26)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* 28 letter */}
+              <input
+                style={
+                  fiveStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 27)}
+                onKeyDown={(event) => onKeyDown(event, 27)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* 29 letter */}
+              <input
+                style={
+                  fiveStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 28)}
+                onKeyDown={(event) => onKeyDown(event, 28)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* 30 letter */}
+              <input
+                style={
+                  fiveStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 29)}
+                onKeyDown={(event) => onKeyDown(event, 29)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* 31 letter */}
+              <div className="letter">{randomWord[5]}</div>
+            </div>
+            <div className="box">
+              {/* 32 letter */}
+              <input
+                style={
+                  sixStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 31)}
+                onKeyDown={(event) => onKeyDown(event, 31)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* 33 letter */}
+              <input
+                style={
+                  sixStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 32)}
+                onKeyDown={(event) => onKeyDown(event, 32)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* 34 letter */}
+              <input
+                style={
+                  sixStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 33)}
+                onKeyDown={(event) => onKeyDown(event, 33)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* 35 letter */}
+              <input
+                style={
+                  sixStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 34)}
+                onKeyDown={(event) => onKeyDown(event, 34)}
+              ></input>
+            </div>
+            <div className="box">
+              {/* 36 letter */}
+              <input
+                style={
+                  sixStyle === true
+                    ? { backgroundColor: '#7efa82' }
+                    : { color: 'red' }
+                }
+                id="letter"
+                type="text"
+                autoComplete="off"
+                maxLength={1}
+                onChange={(event) => handleChange(event, 35)}
+                onKeyDown={(event) => onKeyDown(event, 35)}
               ></input>
             </div>
           </div>
-          <div className="box">
-            {/* three letter */}
-            <input
-              style={
-                oneStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 2)}
-              onKeyDown={(event) => onKeyDown(event, 2)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* four letter */}
-            <input
-              style={
-                oneStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 3)}
-              onKeyDown={(event) => onKeyDown(event, 3)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* five letter */}
-            <input
-              style={
-                oneStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 4)}
-              onKeyDown={(event) => onKeyDown(event, 4)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* six letter */}
-            <input
-              style={
-                oneStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 5)}
-              onKeyDown={(event) => onKeyDown(event, 5)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* seven letter */}
-            <div className="letter">{randomWord[1]}</div>
-          </div>
-          <div className="box">
-            {/* eight letter */}
-            <input
-              style={
-                twoStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 7)}
-              onKeyDown={(event) => onKeyDown(event, 7)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* nine letter */}
-            <input
-              style={
-                twoStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 8)}
-              onKeyDown={(event) => onKeyDown(event, 8)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* tenth letter */}
-            <input
-              style={
-                twoStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 9)}
-              onKeyDown={(event) => onKeyDown(event, 9)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* eleventh letter */}
-            <input
-              style={
-                twoStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 10)}
-              onKeyDown={(event) => onKeyDown(event, 10)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* 12 letter */}
-            <input
-              style={
-                twoStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 11)}
-              onKeyDown={(event) => onKeyDown(event, 11)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* 13 letter */}
-            <div className="letter">{randomWord[2]}</div>
-          </div>
-          <div className="box">
-            {/* 14 letter */}
-            <input
-              style={
-                threeStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 13)}
-              onKeyDown={(event) => onKeyDown(event, 13)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* 15 letter */}
-            <input
-              style={
-                threeStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 14)}
-              onKeyDown={(event) => onKeyDown(event, 14)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* 16 letter */}
-            <input
-              style={
-                threeStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 15)}
-              onKeyDown={(event) => onKeyDown(event, 15)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* 17 letter */}
-            <input
-              style={
-                threeStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 16)}
-              onKeyDown={(event) => onKeyDown(event, 16)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* 18 letter */}
-            <input
-              style={
-                threeStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 17)}
-              onKeyDown={(event) => onKeyDown(event, 17)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* 19 letter */}
-            <div className="letter">{randomWord[3]}</div>
-          </div>
-          <div className="box">
-            {/* 20 letter */}
-            <input
-              style={
-                fourStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 19)}
-              onKeyDown={(event) => onKeyDown(event, 19)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* 21 letter */}
-            <input
-              style={
-                fourStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 20)}
-              onKeyDown={(event) => onKeyDown(event, 20)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* 22 letter */}
-            <input
-              style={
-                fourStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 21)}
-              onKeyDown={(event) => onKeyDown(event, 21)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* 23 letter */}
-            <input
-              style={
-                fourStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 22)}
-              onKeyDown={(event) => onKeyDown(event, 22)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* 24 letter */}
-            <input
-              style={
-                fourStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 23)}
-              onKeyDown={(event) => onKeyDown(event, 23)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* 25 letter */}
-            <div className="letter">{randomWord[4]}</div>
-          </div>
-          <div className="box">
-            {/* 26 letter */}
-            <input
-              style={
-                fiveStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 25)}
-              onKeyDown={(event) => onKeyDown(event, 25)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* 27 letter */}
-            <input
-              style={
-                fiveStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 26)}
-              onKeyDown={(event) => onKeyDown(event, 26)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* 28 letter */}
-            <input
-              style={
-                fiveStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 27)}
-              onKeyDown={(event) => onKeyDown(event, 27)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* 29 letter */}
-            <input
-              style={
-                fiveStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 28)}
-              onKeyDown={(event) => onKeyDown(event, 28)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* 30 letter */}
-            <input
-              style={
-                fiveStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 29)}
-              onKeyDown={(event) => onKeyDown(event, 29)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* 31 letter */}
-            <div className="letter">{randomWord[5]}</div>
-          </div>
-          <div className="box">
-            {/* 32 letter */}
-            <input
-              style={
-                sixStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 31)}
-              onKeyDown={(event) => onKeyDown(event, 31)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* 33 letter */}
-            <input
-              style={
-                sixStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 32)}
-              onKeyDown={(event) => onKeyDown(event, 32)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* 34 letter */}
-            <input
-              style={
-                sixStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 33)}
-              onKeyDown={(event) => onKeyDown(event, 33)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* 35 letter */}
-            <input
-              style={
-                sixStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 34)}
-              onKeyDown={(event) => onKeyDown(event, 34)}
-            ></input>
-          </div>
-          <div className="box">
-            {/* 36 letter */}
-            <input
-              style={
-                sixStyle === true
-                  ? { backgroundColor: '#7efa82' }
-                  : { color: 'red' }
-              }
-              id="letter"
-              type="text"
-              autoComplete="off"
-              maxLength={1}
-              onChange={(event) => handleChange(event, 35)}
-              onKeyDown={(event) => onKeyDown(event, 35)}
-            ></input>
-          </div>
+          <div></div>
         </div>
-        <div></div>
-      </div>
-      <div>
-        <button
-          type="button"
-          className={styles.button}
-          onClick={() => window.location.reload(false)}
-        >
-          NEW GAME
-        </button>
-        <button type="button" className={styles.button} onClick={handleClick}>
-          NEW WORD
-        </button>
+        <div>
+          <button
+            type="button"
+            className={styles.button}
+            onClick={() => window.location.reload(false)}
+          >
+            NEW GAME
+          </button>
+          <button type="button" className={styles.button} onClick={handleClick}>
+            NEW WORD
+          </button>
+        </div>
+        <div className="rules-container">
+          <p>HOW TO PLAY:</p>
+          <br></br>
+          <br></br>
+          <p>A</p>
+          <p>&nbsp;A</p>
+        </div>
       </div>
     </div>
   )

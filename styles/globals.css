@@ -76,3 +76,36 @@ a {
   
   
  }
+
+ .rules-container {
+  display: grid;
+  justify-content: center;
+  border: 1px solid lightgrey;
+  width: 480px;
+  font-size: 10px;
+  color: grey;
+
+ }
+
+
+
+ .tweetbutton {
+  margin-top: 2rem;
+  background-color: #1b95e0;
+  color: #fff;
+  border-radius: 4px;
+  height: 28px;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 26px;
+  padding: 8px 8px 8px 30px;
+  text-decoration: none;
+  background-image: url('/twitter.png');
+  background-repeat: no-repeat;
+  background-size: 16px 13px;
+  background-position: 8px 10px;
+}
+
+.tweetbutton:hover {
+  background-color: #0c7abf;
+}
