@@ -1,7 +1,7 @@
 import Head from 'next/head'
-
+import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 import { WORDS } from '../components/wordlist'
 import { fetchWords } from './api/dictionary'
@@ -9,6 +9,9 @@ import { connects } from '../components/connects'
 
 const getRandomWords = () => {
   return WORDS[Math.floor(Math.random() * WORDS.length)]
+}
+function getWords(param) {
+  return WORDS[param]
 }
 
 // To do:
@@ -18,14 +21,15 @@ const getRandomWords = () => {
 // Fix first word has to be different (done)
 // conditions for letter going down and across then (done)
 // add points based on letter values to a point summary (done)
-// change colour if letters go in certain directions
 
+// change colour if letters go in certain directions
 // Random word each date
 // add directions for gameplay
-// styling
+// styling, webpage grid, logo,
 
 export default function Home() {
   const [randomWord, setRandomWord] = useState([])
+  const [displayWord, setDisplayWord] = useState([])
   const [words, setWords] = useState(['', '', '', '', '', ''])
   const [start, setStart] = useState(false)
   const [backspace, setBackspace] = useState(false)
@@ -37,6 +41,9 @@ export default function Home() {
   const [fourStyle, setFourStyle] = useState(false)
   const [fiveStyle, setFiveStyle] = useState(false)
   const [sixStyle, setSixStyle] = useState(false)
+
+  //ref
+  // const ref = useRef(null)
 
   // setscore
 
@@ -80,12 +87,83 @@ export default function Home() {
     '',
     '',
   ])
+  // Daily word
+  const dailyWord = () => {
+    const day = []
+
+    // for today
+    var M = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    var x = new Date()
+    var m = x.getMonth()
+    var y = x.getFullYear()
+    if (y % 400 == 0 || (y % 4 == 0 && y % 100 != 0)) {
+      ++M[1]
+    }
+    var Y = 0
+    for (var i = 0; i < m; ++i) {
+      Y += M[i]
+    }
+    day.push(Y + x.getDate())
+    console.log(day)
+    console.log('day[0]', day[0])
+    //////////////////
+    const newWord = getWords(day[0])
+    const splitWord = newWord.split('')
+    setRandomWord(newWord)
+    setDisplayWord(newWord)
+    setLetter([
+      splitWord[0].toLowerCase(),
+      '',
+      '',
+      '',
+      '',
+      '',
+      splitWord[1].toLowerCase(),
+      '',
+      '',
+      '',
+      '',
+      '',
+      splitWord[2].toLowerCase(),
+      '',
+      '',
+      '',
+      '',
+      '',
+      splitWord[3].toLowerCase(),
+      '',
+      '',
+      '',
+      '',
+      '',
+      splitWord[4].toLowerCase(),
+      '',
+      '',
+      '',
+      '',
+      '',
+      splitWord[5].toLowerCase(),
+      '',
+      '',
+      '',
+      '',
+      '',
+    ])
+
+    sliceIntoChunks(letter)
+    colorCheck(letter)
+    setStart(true)
+    const fetchScore = connects(letter)
+    setScore(fetchScore)
+  }
 
   // random word
   const handleClick = () => {
+    // ref.current.value = ''
     // shuffle array and pick random
 
     const newWord = getRandomWords()
+
     // split letters to enter into array
     const splitWord = newWord.split('')
 
@@ -128,6 +206,12 @@ export default function Home() {
       '',
       '',
     ])
+
+    sliceIntoChunks(letter)
+    colorCheck(letter)
+    setStart(true)
+    const fetchScore = connects(letter)
+    setScore(fetchScore)
   }
 
   // Add letter to the array
@@ -143,7 +227,7 @@ export default function Home() {
 
       setStart(true)
 
-      colorCheck(...letter)
+      colorCheck(letter)
       // perform connection function for matching
       const fetchScore = connects(letter)
 
@@ -164,10 +248,9 @@ export default function Home() {
       setScore(fetchScore)
 
       setBackspace(true)
-      setLetter([...letter])
+      setLetter(letter)
       sliceIntoChunks(letter)
       colorCheck(letter)
-      console.log('backsapce letter', letter)
     }
   }
 
@@ -192,7 +275,7 @@ export default function Home() {
     // sliceIntoChunks(letter)
     setStart(false)
     setBackspace(false)
-    console.log('words', words)
+
     if (
       /[a-zA-Z]/g.test(words[0]) &&
       words[0].length === 6 &&
@@ -228,7 +311,6 @@ export default function Home() {
       let fourWord = words[3]
       // fetchWords(words[0])
       if (fetchWords(fourWord)) {
-        console.log('fourWord', fourWord)
         setFourStyle(true)
       }
     } else {
@@ -256,7 +338,6 @@ export default function Home() {
 
   function colorCheck(letter) {
     const empty = ''
-    console.log(letter)
 
     switch (empty) {
       case letter[1]:
@@ -356,12 +437,9 @@ export default function Home() {
 
   return (
     <div>
-      <a
-        className="tweetbutton"
-        href={`https://twitter.com/intent/tweet?text=%5B${words}%5D%20%5BScore:%20${score}%5D`}
-      >
-        Tweet
-      </a>
+      {/* <div className="">
+        <p>Todays word is {displayWord}</p>
+      </div> */}
       <div className={styles.container}>
         <Head>
           <title>AcrossIt!</title>
@@ -369,12 +447,14 @@ export default function Home() {
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <div className="header">
-          <h1>AcrossIt</h1>
-        </div>
-        <div className="score">
-          <p>Score: {score}</p>
-        </div>
+        <Image
+          className="header"
+          src="/AcrossItlogo1.png"
+          alt="Logo Header"
+          width={100}
+          height={75}
+        />
+
         <div className="container">
           <div className="game-board">
             <div className="box">
@@ -392,6 +472,7 @@ export default function Home() {
                   }
                   id="letter"
                   type="text"
+                  // ref={ref}
                   autoComplete="off"
                   maxLength={1}
                   onChange={(event) => handleChange(event, 1)}
@@ -884,9 +965,12 @@ export default function Home() {
               ></input>
             </div>
           </div>
-          <div></div>
+
+          <div className="score">
+            <p>SCORE: {score}</p>
+          </div>
         </div>
-        <div>
+        <div className="items">
           <button
             type="button"
             className={styles.button}
@@ -895,12 +979,18 @@ export default function Home() {
             NEW GAME
           </button>
           <button type="button" className={styles.button} onClick={handleClick}>
-            NEW WORD
+            RANDOM WORD
+          </button>
+          <button type="button" className={styles.button} onClick={dailyWord}>
+            TODAYS WORD
           </button>
         </div>
-        <div className="rules-container">
-          <p>HOW TO PLAY:</p>
-        </div>
+        <a
+          className="tweetbutton"
+          href={`https://twitter.com/intent/tweet?text=${words}%20%28Score:%20${score}%29`}
+        >
+          Tweet
+        </a>
       </div>
     </div>
   )

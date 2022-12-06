@@ -40,7 +40,7 @@ export function connects(letters) {
       }
     })
   })
-
+ 
   const newArr = repeats.map((x) => {
     if (x === '') {
       return '$'
@@ -50,6 +50,8 @@ export function connects(letters) {
 
   let matchCount = newArr.join('')
   let LetterCounter = []
+
+
 
   const s = matchCount.match(/([a-zA-Z])\1*/g) || []
   s.map((itm) => {
@@ -594,6 +596,5 @@ export function connects(letters) {
 
   ////////////////////////////
 
-  console.log(score)
   return score
 }
