@@ -456,6 +456,9 @@ export default function Home() {
         />
 
         <div className="container">
+        <div className="score">
+            <p>SCORE: {score}</p>
+          </div>
           <div className="game-board">
             <div className="box">
               {/* frist letter */}
@@ -966,9 +969,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="score">
-            <p>SCORE: {score}</p>
-          </div>
+          
         </div>
         <div className="items">
           <button
