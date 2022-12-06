@@ -442,18 +442,33 @@ export default function Home() {
       </div> */}
       <div className={styles.container}>
         <Head>
-          <title>AcrossIt!</title>
-          <meta name="AcrossIt :)" />
+          <title>Across It</title>
+          <meta name="Across It" />
           <link rel="icon" href="/faviconlogo.ico" />
         </Head>
 
-        <Image
-          className="header"
-          src="/AcrossItlogo1.png"
-          alt="Logo Header"
-          width={100}
-          height={75}
-        />
+        <div className="items">
+          <Image
+            className="header"
+            src="/AcrossItlogo1.png"
+            alt="Logo Header"
+            width={100}
+            height={75}
+          />
+          <button
+            type="button"
+            className={styles.button}
+            onClick={() => window.location.reload(false)}
+          >
+            NEW GAME
+          </button>
+          <button type="button" className={styles.button} onClick={handleClick}>
+            RANDOM WORD
+          </button>
+          <button type="button" className={styles.button} onClick={dailyWord}>
+            TODAYS WORD
+          </button>
+        </div>
 
         <div className="container">
           <div className="score">
@@ -969,21 +984,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="items">
-          <button
-            type="button"
-            className={styles.button}
-            onClick={() => window.location.reload(false)}
-          >
-            NEW GAME
-          </button>
-          <button type="button" className={styles.button} onClick={handleClick}>
-            RANDOM WORD
-          </button>
-          <button type="button" className={styles.button} onClick={dailyWord}>
-            TODAYS WORD
-          </button>
-        </div>
+
         <a
           className="tweetbutton"
           href={`https://twitter.com/intent/tweet?text=${words}%20%28Score:%20${score}%29`}
