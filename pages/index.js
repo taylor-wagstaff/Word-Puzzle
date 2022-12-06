@@ -444,7 +444,7 @@ export default function Home() {
         <Head>
           <title>AcrossIt!</title>
           <meta name="AcrossIt :)" />
-          <link rel="icon" href="/favicon.ico" />
+          <link rel="icon" href="/faviconlogo.ico" />
         </Head>
 
         <Image
@@ -456,7 +456,7 @@ export default function Home() {
         />
 
         <div className="container">
-        <div className="score">
+          <div className="score">
             <p>SCORE: {score}</p>
           </div>
           <div className="game-board">
@@ -968,8 +968,6 @@ export default function Home() {
               ></input>
             </div>
           </div>
-
-          
         </div>
         <div className="items">
           <button
