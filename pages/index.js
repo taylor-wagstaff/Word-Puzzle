@@ -88,7 +88,7 @@ export default function Home() {
     '',
   ])
   // Daily word
-  const dailyWord = () => {
+  useEffect(() => {
     const day = []
 
     // for today
@@ -155,64 +155,66 @@ export default function Home() {
     setStart(true)
     const fetchScore = connects(letter)
     setScore(fetchScore)
-  }
+  }, [])
+
+  // const dailyWord = () => {
 
   // random word
-  const handleClick = () => {
-    // ref.current.value = ''
-    // shuffle array and pick random
+  // const handleClick = () => {
+  //   // ref.current.value = ''
+  //   // shuffle array and pick random
 
-    const newWord = getRandomWords()
+  //   const newWord = getRandomWords()
 
-    // split letters to enter into array
-    const splitWord = newWord.split('')
+  //   // split letters to enter into array
+  //   const splitWord = newWord.split('')
 
-    setRandomWord(newWord)
-    setLetter([
-      splitWord[0].toLowerCase(),
-      '',
-      '',
-      '',
-      '',
-      '',
-      splitWord[1].toLowerCase(),
-      '',
-      '',
-      '',
-      '',
-      '',
-      splitWord[2].toLowerCase(),
-      '',
-      '',
-      '',
-      '',
-      '',
-      splitWord[3].toLowerCase(),
-      '',
-      '',
-      '',
-      '',
-      '',
-      splitWord[4].toLowerCase(),
-      '',
-      '',
-      '',
-      '',
-      '',
-      splitWord[5].toLowerCase(),
-      '',
-      '',
-      '',
-      '',
-      '',
-    ])
+  //   setRandomWord(newWord)
+  //   setLetter([
+  //     splitWord[0].toLowerCase(),
+  //     '',
+  //     '',
+  //     '',
+  //     '',
+  //     '',
+  //     splitWord[1].toLowerCase(),
+  //     '',
+  //     '',
+  //     '',
+  //     '',
+  //     '',
+  //     splitWord[2].toLowerCase(),
+  //     '',
+  //     '',
+  //     '',
+  //     '',
+  //     '',
+  //     splitWord[3].toLowerCase(),
+  //     '',
+  //     '',
+  //     '',
+  //     '',
+  //     '',
+  //     splitWord[4].toLowerCase(),
+  //     '',
+  //     '',
+  //     '',
+  //     '',
+  //     '',
+  //     splitWord[5].toLowerCase(),
+  //     '',
+  //     '',
+  //     '',
+  //     '',
+  //     '',
+  //   ])
 
-    sliceIntoChunks(letter)
-    colorCheck(letter)
-    setStart(true)
-    const fetchScore = connects(letter)
-    setScore(fetchScore)
-  }
+  //   sliceIntoChunks(letter)
+  //   colorCheck(letter)
+  //   setStart(true)
+  //   const fetchScore = connects(letter)
+  //   setScore(fetchScore)
+  // }
 
   // Add letter to the array
   const handleChange = (event, param1) => {
@@ -447,27 +449,22 @@ export default function Home() {
           <link rel="icon" href="/faviconlogo.ico" />
         </Head>
 
+        <h2>AcrossIt</h2>
         <div className="items">
-          <Image
+          {/* <Image
             className="header"
             src="/AcrossItlogo1.png"
             alt="Logo Header"
             width={100}
             height={75}
-          />
-          <button
-            type="button"
-            className={styles.button}
-            onClick={() => window.location.reload(false)}
-          >
-            NEW GAME
-          </button>
-          <button type="button" className={styles.button} onClick={handleClick}>
+          /> */}
+
+          {/* <button type="button" className={styles.button} onClick={handleClick}>
             RANDOM WORD
-          </button>
-          <button type="button" className={styles.button} onClick={dailyWord}>
+          </button> */}
+          {/* <button type="button" className={styles.button} onClick={dailyWord}>
             TODAYS WORD
-          </button>
+          </button> */}
         </div>
 
         <div className="container">
@@ -984,6 +981,13 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <button
+          type="button"
+          className={styles.button}
+          onClick={() => window.location.reload(false)}
+        >
+          NEW GAME
+        </button>
 
         <a
           className="tweetbutton"
