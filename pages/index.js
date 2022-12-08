@@ -448,21 +448,29 @@ export default function Home() {
 
         <div className="container">
           <div className="header">
-            <h2>AcrossIt</h2>
+            <Image
+              src="/AcrossItheader.png"
+              alt="Picture of the author"
+              width={220}
+              height={60}
+            />
+             {/* <button
+              type="button"
+              className={styles.button}
+              onClick={() => window.location.reload(false)}
+            >
+              NEW GAME
+            </button> */}
+         
+           
           </div>
           <div className="game-container">
             <div className="game-items">
               <div className="score">
                 <p>score: {score}</p>
               </div>
-              <button
-              type="button"
-              className={styles.button}
-              onClick={() => window.location.reload(false)}
-            >
-              NEW GAME
-            </button>
             </div>
+
             <div className="game-board">
               <div className="box">
                 {/* frist letter */}
@@ -970,13 +978,11 @@ export default function Home() {
                   onChange={(event) => handleChange(event, 35)}
                   onKeyDown={(event) => onKeyDown(event, 35)}
                 ></input>
-               
               </div>
             </div>
           </div>
           <div className="button-container">
-            
-
+           
             <a
               className="tweetbutton"
               href={`https://twitter.com/intent/tweet?text=${words}%20%28Score:%20${score}%29`}
