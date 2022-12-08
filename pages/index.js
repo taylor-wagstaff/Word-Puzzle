@@ -990,8 +990,8 @@ export default function Home() {
               Tweet
             </a>
           </div>
-        </div>
       </div>
+        </div>
     </div>
   )
 }

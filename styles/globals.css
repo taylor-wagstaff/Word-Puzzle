@@ -116,8 +116,8 @@ a {
 }
 
 .button-container{
- 
-
+  margin-top: 0.3rem;
+  margin-bottom: 1rem;
   align-items: center;
   /* background-color: rgb(240, 240, 240);; */
 }
@@ -258,8 +258,8 @@ input[type=text]{
 
 
  .tweetbutton {
+
   
- 
   background-color: #c4c4c4;
   color: #fff;
   border-radius: 4px;
