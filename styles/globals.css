@@ -245,6 +245,11 @@ input[type=text]{
 
  }
 
+ .quote{
+  color: rgb(166, 166, 166);
+  font-size: 0.9rem;
+ }
+
  .rules-container {
   display: grid;
   justify-content: center;

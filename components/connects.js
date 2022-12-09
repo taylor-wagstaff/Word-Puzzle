@@ -40,7 +40,7 @@ export function connects(letters) {
       }
     })
   })
- 
+
   const newArr = repeats.map((x) => {
     if (x === '') {
       return '$'
@@ -48,10 +48,26 @@ export function connects(letters) {
     return x
   })
 
+  // want the consective values positions
+  const findDuplicates = newArr.filter((item, index) => newArr.indexOf(item) !== index)
+ 
+
+  const values = []
+
+
+  newArr.map((letter, i) => {
+    dir1.map((num, index) => {
+      if (index === i && letter != '$') {
+        
+        values.push(num)
+      }
+    })
+  })
+
+  /////////////////////////
+
   let matchCount = newArr.join('')
   let LetterCounter = []
-
-
 
   const s = matchCount.match(/([a-zA-Z])\1*/g) || []
   s.map((itm) => {
