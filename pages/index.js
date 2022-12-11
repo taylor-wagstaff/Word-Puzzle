@@ -498,100 +498,43 @@ export default function Home() {
   function colorCheck(letter) {
     const empty = ''
 
-    switch (empty) {
-      case letter[1]:
+    const word1 = letter.slice(1, 6)
+    const word2 = letter.slice(7, 12)
+    const word3 = letter.slice(13, 18)
+    const word4 = letter.slice(19, 24)
+    const word5 = letter.slice(25, 30)
+    const word6 = letter.slice(31, 36)
+
+    word1.map((x) => {
+      if (x === empty) {
         setOneStyle(false)
-        break
-      case letter[2]:
-        setOneStyle(false)
-        break
-      case letter[3]:
-        setOneStyle(false)
-        break
-      case letter[4]:
-        setOneStyle(false)
-        break
-      case letter[5]:
-        setOneStyle(false)
-        break
-      case letter[7]:
+      }
+    })
+    word2.map((x) => {
+      if (x === empty) {
         setTwoStyle(false)
-        break
-      case letter[8]:
-        setTwoStyle(false)
-        break
-      case letter[9]:
-        setTwoStyle(false)
-        break
-      case letter[10]:
-        setTwoStyle(false)
-        break
-      case letter[11]:
-        setTwoStyle(false)
-        break
-      case letter[13]:
+      }
+    })
+    word3.map((x) => {
+      if (x === empty) {
         setThreeStyle(false)
-        break
-      case letter[14]:
-        setThreeStyle(false)
-        break
-      case letter[15]:
-        setThreeStyle(false)
-        break
-      case letter[16]:
-        setThreeStyle(false)
-        break
-      case letter[17]:
-        setThreeStyle(false)
-        break
-      case letter[19]:
+      }
+    })
+    word4.map((x) => {
+      if (x === empty) {
         setFourStyle(false)
-        break
-      case letter[20]:
-        setFourStyle(false)
-        break
-      case letter[21]:
-        setFourStyle(false)
-        break
-      case letter[22]:
-        setFourStyle(false)
-        break
-      case letter[23]:
-        setFourStyle(false)
-        break
-      case letter[25]:
+      }
+    })
+    word5.map((x) => {
+      if (x === empty) {
         setFiveStyle(false)
-        break
-      case letter[26]:
-        setFiveStyle(false)
-        break
-      case letter[27]:
-        setFiveStyle(false)
-        break
-      case letter[28]:
-        setFiveStyle(false)
-        break
-      case letter[29]:
-        setFiveStyle(false)
-        break
-      case letter[31]:
+      }
+    })
+    word6.map((x) => {
+      if (x === empty) {
         setSixStyle(false)
-        break
-      case letter[32]:
-        setSixStyle(false)
-        break
-      case letter[33]:
-        setSixStyle(false)
-        break
-      case letter[34]:
-        setSixStyle(false)
-        break
-      case letter[35]:
-        setSixStyle(false)
-        break
-      default:
-      // execute default code block
-    }
+      }
+    })
   }
 
   return (
@@ -602,6 +545,9 @@ export default function Home() {
           <meta name="Across It" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
+        <div className="quote">
+          <p>Todays word is {displayWord}</p>
+        </div>
 
         <div className="container">
           <div className="header">
