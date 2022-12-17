@@ -31,6 +31,38 @@ export function connects(letters) {
   const repeats13 = []
   const repeats14 = []
 
+  const letterValues = []
+  const letterValues2 = []
+  const letterValues3 = []
+  const letterValues4 = []
+  const letterValues5 = []
+  const letterValues6 = []
+  const letterValues7 = []
+  const letterValues8 = []
+  const letterValues9 = []
+  const letterValues10 = []
+  const letterValues11 = []
+  const letterValues12 = []
+  const letterValues13 = []
+  const letterValues14 = []
+
+  const letterMap = []
+  const letterMap2 = []
+  const letterMap3 = []
+  const letterMap4 = []
+  const letterMap5 = []
+  const letterMap6 = []
+  const letterMap7 = []
+  const letterMap8 = []
+  const letterMap9 = []
+  const letterMap10 = []
+  const letterMap11 = []
+  const letterMap12 = []
+  const letterMap13 = []
+  const letterMap14 = []
+
+  const directionValues = []
+
   // check for Six matches across [0, 7, 14, 21, 28, 35]
   ////////////////////////////
   dir1.map((num, i) => {
@@ -47,24 +79,6 @@ export function connects(letters) {
     }
     return x
   })
-
-  // want the consective values positions
-  const findDuplicates = newArr.filter((item, index) => newArr.indexOf(item) !== index)
- 
-
-  const values = []
-
-
-  newArr.map((letter, i) => {
-    dir1.map((num, index) => {
-      if (index === i && letter != '$') {
-        
-        values.push(num)
-      }
-    })
-  })
-
-  /////////////////////////
 
   let matchCount = newArr.join('')
   let LetterCounter = []
@@ -611,6 +625,373 @@ export function connects(letters) {
   })
 
   ////////////////////////////
+  //////////////////////////
 
-  return score
+  LetterCounter.map((x) => {
+    if (x[1] === 3) {
+      letterValues.push(x[0])
+    }
+    if (x[1] === 4) {
+      letterValues.push(x[0])
+    }
+    if (x[1] === 5) {
+      letterValues.push(x[0])
+    }
+    if (x[1] === 6) {
+      letterValues.push(x[0])
+    }
+  })
+
+  letterValues.map((x, i) => {
+    // letter values is "s"
+    newArr.map((y, index) => {
+      // if "s" equal y consectively push the index at where it occurs.
+      if (x === y) {
+        letterMap.push(index)
+      }
+    })
+  })
+
+  letterMap.map((x, i) => {
+    dir1.map((y, index) => {
+      if (x === index) {
+        directionValues.push(y)
+      }
+    })
+  })
+
+  console.log('newarr', newArr)
+  console.log('letterMap', letterMap)
+
+  console.log('directionValues', directionValues)
+
+  //////////////////////////
+  //////////////////////////
+
+  LetterCounter2.map((x) => {
+    if (x[1] >= 3) {
+      letterValues2.push(x[0])
+    }
+  })
+
+  letterValues2.map((x, i) => {
+    newArr2.map((y, index) => {
+      if (x === y) {
+        letterMap2.push(index)
+      }
+    })
+  })
+
+  letterMap2.map((x, i) => {
+    dir2.map((y, index) => {
+      if (x === index) {
+        directionValues.push(y)
+      }
+    })
+  })
+
+  ////////////////////////////////
+  //////////////////////////
+
+  LetterCounter3.map((x) => {
+    if (x[1] >= 3) {
+      letterValues3.push(x[0])
+    }
+  })
+
+  letterValues3.map((x, i) => {
+    newArr3.map((y, index) => {
+      if (x === y) {
+        letterMap3.push(index)
+      }
+    })
+  })
+
+  letterMap3.map((x, i) => {
+    dir3.map((y, index) => {
+      if (x === index) {
+        directionValues.push(y)
+      }
+    })
+  })
+
+  ////////////////////////////////
+  //////////////////////////
+
+  LetterCounter4.map((x) => {
+    if (x[1] >= 3) {
+      letterValues4.push(x[0])
+    }
+  })
+
+  letterValues4.map((x, i) => {
+    newArr4.map((y, index) => {
+      if (x === y) {
+        letterMap4.push(index)
+      }
+    })
+  })
+
+  letterMap4.map((x, i) => {
+    dir4.map((y, index) => {
+      if (x === index) {
+        directionValues.push(y)
+      }
+    })
+  })
+
+  ////////////////////////////////
+  //////////////////////////
+
+  LetterCounter5.map((x) => {
+    if (x[1] >= 3) {
+      letterValues5.push(x[0])
+    }
+  })
+
+  letterValues5.map((x, i) => {
+    newArr5.map((y, index) => {
+      if (x === y) {
+        letterMap5.push(index)
+      }
+    })
+  })
+
+  letterMap5.map((x, i) => {
+    dir5.map((y, index) => {
+      if (x === index) {
+        directionValues.push(y)
+      }
+    })
+  })
+
+  ////////////////////////////////
+  //////////////////////////
+
+  LetterCounter6.map((x) => {
+    if (x[1] >= 3) {
+      letterValues6.push(x[0])
+    }
+  })
+
+  letterValues6.map((x, i) => {
+    newArr6.map((y, index) => {
+      if (x === y) {
+        letterMap6.push(index)
+      }
+    })
+  })
+
+  letterMap6.map((x, i) => {
+    dir6.map((y, index) => {
+      if (x === index) {
+        directionValues.push(y)
+      }
+    })
+  })
+
+  ////////////////////////////////
+  //////////////////////////
+
+  LetterCounter7.map((x) => {
+    if (x[1] >= 3) {
+      letterValues7.push(x[0])
+    }
+  })
+
+  letterValues7.map((x, i) => {
+    newArr7.map((y, index) => {
+      if (x === y) {
+        letterMap7.push(index)
+      }
+    })
+  })
+
+  letterMap7.map((x, i) => {
+    dir7.map((y, index) => {
+      if (x === index) {
+        directionValues.push(y)
+      }
+    })
+  })
+
+  ////////////////////////////////
+  //////////////////////////
+
+  LetterCounter8.map((x) => {
+    if (x[1] >= 3) {
+      letterValues8.push(x[0])
+    }
+  })
+
+  letterValues8.map((x, i) => {
+    newArr8.map((y, index) => {
+      if (x === y) {
+        letterMap8.push(index)
+      }
+    })
+  })
+
+  letterMap8.map((x, i) => {
+    dir8.map((y, index) => {
+      if (x === index) {
+        directionValues.push(y)
+      }
+    })
+  })
+
+  ////////////////////////////////
+  //////////////////////////
+
+  LetterCounter9.map((x) => {
+    if (x[1] >= 3) {
+      letterValues9.push(x[0])
+    }
+  })
+
+  letterValues9.map((x, i) => {
+    newArr9.map((y, index) => {
+      if (x === y) {
+        letterMap9.push(index)
+      }
+    })
+  })
+
+  letterMap9.map((x, i) => {
+    dir9.map((y, index) => {
+      if (x === index) {
+        directionValues.push(y)
+      }
+    })
+  })
+
+  ////////////////////////////////
+  //////////////////////////
+
+  LetterCounter10.map((x) => {
+    if (x[1] >= 3) {
+      letterValues10.push(x[0])
+    }
+  })
+
+  letterValues10.map((x, i) => {
+    newArr10.map((y, index) => {
+      if (x === y) {
+        letterMap10.push(index)
+      }
+    })
+  })
+
+  letterMap10.map((x, i) => {
+    dir10.map((y, index) => {
+      if (x === index) {
+        directionValues.push(y)
+      }
+    })
+  })
+
+  ////////////////////////////////
+  //////////////////////////
+
+  LetterCounter11.map((x) => {
+    if (x[1] >= 3) {
+      letterValues11.push(x[0])
+    }
+  })
+
+  letterValues11.map((x, i) => {
+    newArr11.map((y, index) => {
+      if (x === y) {
+        letterMap11.push(index)
+      }
+    })
+  })
+
+  letterMap11.map((x, i) => {
+    dir11.map((y, index) => {
+      if (x === index) {
+        directionValues.push(y)
+      }
+    })
+  })
+
+  ////////////////////////////////
+  //////////////////////////
+
+  LetterCounter12.map((x) => {
+    if (x[1] >= 3) {
+      letterValues12.push(x[0])
+    }
+  })
+
+  letterValues12.map((x, i) => {
+    newArr12.map((y, index) => {
+      if (x === y) {
+        letterMap12.push(index)
+      }
+    })
+  })
+
+  letterMap12.map((x, i) => {
+    dir12.map((y, index) => {
+      if (x === index) {
+        directionValues.push(y)
+      }
+    })
+  })
+
+  ////////////////////////////////
+  //////////////////////////
+
+  LetterCounter13.map((x) => {
+    if (x[1] >= 3) {
+      letterValues13.push(x[0])
+    }
+  })
+
+  letterValues13.map((x, i) => {
+    newArr13.map((y, index) => {
+      if (x === y) {
+        letterMap13.push(index)
+      }
+    })
+  })
+
+  letterMap13.map((x, i) => {
+    dir13.map((y, index) => {
+      if (x === index) {
+        directionValues.push(y)
+      }
+    })
+  })
+
+  ////////////////////////////////
+  //////////////////////////
+
+  LetterCounter14.map((x) => {
+    if (x[1] >= 3) {
+      letterValues14.push(x[0])
+    }
+  })
+
+  letterValues14.map((x, i) => {
+    newArr14.map((y, index) => {
+      if (x === y) {
+        letterMap14.push(index)
+      }
+    })
+  })
+
+  letterMap14.map((x, i) => {
+    dir14.map((y, index) => {
+      if (x === index) {
+        directionValues.push(y)
+      }
+    })
+  })
+  console.log('directionValues', directionValues)
+
+  ////////////////////////////////
+
+  return [score, directionValues]
 }

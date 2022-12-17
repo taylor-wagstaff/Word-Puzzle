@@ -84,6 +84,45 @@ export default function Home() {
   // setscore
 
   const [score, setScore] = useState(0)
+  const [letterBorder, setLetterBorder] = useState([])
+  const [letterBg, setLetterBg] = useState({
+    0: false,
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+    5: false,
+    6: false,
+    7: false,
+    8: false,
+    9: false,
+    10: false,
+    11: false,
+    12: false,
+    13: false,
+    14: false,
+    15: false,
+    16: false,
+    17: false,
+    18: false,
+    19: false,
+    20: false,
+    21: false,
+    22: false,
+    23: false,
+    24: false,
+    25: false,
+    26: false,
+    27: false,
+    28: false,
+    29: false,
+    30: false,
+    31: false,
+    32: false,
+    33: false,
+    34: false,
+    35: false,
+  })
 
   const [letter, setLetter] = useState([
     '',
@@ -189,7 +228,8 @@ export default function Home() {
     colorCheck(letter)
     setStart(true)
     const fetchScore = connects(letter)
-    setScore(fetchScore)
+    setScore(fetchScore[0])
+    setLetterBorder(fetchScore[1])
   }, [])
 
   // Add letter to the array
@@ -209,7 +249,10 @@ export default function Home() {
       // perform connection function for matching
       const fetchScore = connects(letter)
 
-      setScore(fetchScore)
+      setScore(fetchScore[0])
+      setLetterBorder(fetchScore[1])
+
+     
     }
   }
 
@@ -404,7 +447,10 @@ export default function Home() {
 
       const fetchScore = connects(letter)
 
-      setScore(fetchScore)
+      setScore(fetchScore[0])
+      setLetterBorder(fetchScore[1])
+
+    
 
       setBackspace(true)
       setLetter(letter)
@@ -537,6 +583,117 @@ export default function Home() {
     })
   }
 
+  useEffect(() => {
+    letterBorder.includes(0)
+      ? setLetterBg((prev) => ({ ...prev, 0: true }))
+      : setLetterBg((prev) => ({ ...prev, 0: false }))
+    letterBorder.includes(1)
+      ? setLetterBg((prev) => ({ ...prev, 1: true }))
+      : setLetterBg((prev) => ({ ...prev, 1: false }))
+    letterBorder.includes(2)
+      ? setLetterBg((prev) => ({ ...prev, 2: true }))
+      : setLetterBg((prev) => ({ ...prev, 2: false }))
+    letterBorder.includes(3)
+      ? setLetterBg((prev) => ({ ...prev, 3: true }))
+      : setLetterBg((prev) => ({ ...prev, 3: false }))
+    letterBorder.includes(4)
+      ? setLetterBg((prev) => ({ ...prev, 4: true }))
+      : setLetterBg((prev) => ({ ...prev, 4: false }))
+    letterBorder.includes(5)
+      ? setLetterBg((prev) => ({ ...prev, 5: true }))
+      : setLetterBg((prev) => ({ ...prev, 5: false }))
+    letterBorder.includes(6)
+      ? setLetterBg((prev) => ({ ...prev, 6: true }))
+      : setLetterBg((prev) => ({ ...prev, 6: false }))
+    letterBorder.includes(7)
+      ? setLetterBg((prev) => ({ ...prev, 7: true }))
+      : setLetterBg((prev) => ({ ...prev, 7: false }))
+    letterBorder.includes(8)
+      ? setLetterBg((prev) => ({ ...prev, 8: true }))
+      : setLetterBg((prev) => ({ ...prev, 8: false }))
+    letterBorder.includes(9)
+      ? setLetterBg((prev) => ({ ...prev, 9: true }))
+      : setLetterBg((prev) => ({ ...prev, 9: false }))
+    letterBorder.includes(10)
+      ? setLetterBg((prev) => ({ ...prev, 10: true }))
+      : setLetterBg((prev) => ({ ...prev, 10: false }))
+    letterBorder.includes(11)
+      ? setLetterBg((prev) => ({ ...prev, 11: true }))
+      : setLetterBg((prev) => ({ ...prev, 11: false }))
+    letterBorder.includes(12)
+      ? setLetterBg((prev) => ({ ...prev, 12: true }))
+      : setLetterBg((prev) => ({ ...prev, 12: false }))
+    letterBorder.includes(13)
+      ? setLetterBg((prev) => ({ ...prev, 13: true }))
+      : setLetterBg((prev) => ({ ...prev, 13: false }))
+    letterBorder.includes(14)
+      ? setLetterBg((prev) => ({ ...prev, 14: true }))
+      : setLetterBg((prev) => ({ ...prev, 14: false }))
+    letterBorder.includes(15)
+      ? setLetterBg((prev) => ({ ...prev, 15: true }))
+      : setLetterBg((prev) => ({ ...prev, 15: false }))
+    letterBorder.includes(16)
+      ? setLetterBg((prev) => ({ ...prev, 16: true }))
+      : setLetterBg((prev) => ({ ...prev, 16: false }))
+    letterBorder.includes(17)
+      ? setLetterBg((prev) => ({ ...prev, 17: true }))
+      : setLetterBg((prev) => ({ ...prev, 17: false }))
+    letterBorder.includes(18)
+      ? setLetterBg((prev) => ({ ...prev, 18: true }))
+      : setLetterBg((prev) => ({ ...prev, 18: false }))
+    letterBorder.includes(19)
+      ? setLetterBg((prev) => ({ ...prev, 19: true }))
+      : setLetterBg((prev) => ({ ...prev, 19: false }))
+    letterBorder.includes(20)
+      ? setLetterBg((prev) => ({ ...prev, 20: true }))
+      : setLetterBg((prev) => ({ ...prev, 20: false }))
+    letterBorder.includes(21)
+      ? setLetterBg((prev) => ({ ...prev, 21: true }))
+      : setLetterBg((prev) => ({ ...prev, 21: false }))
+    letterBorder.includes(22)
+      ? setLetterBg((prev) => ({ ...prev, 22: true }))
+      : setLetterBg((prev) => ({ ...prev, 22: false }))
+    letterBorder.includes(23)
+      ? setLetterBg((prev) => ({ ...prev, 23: true }))
+      : setLetterBg((prev) => ({ ...prev, 23: false }))
+    letterBorder.includes(24)
+      ? setLetterBg((prev) => ({ ...prev, 24: true }))
+      : setLetterBg((prev) => ({ ...prev, 24: false }))
+    letterBorder.includes(25)
+      ? setLetterBg((prev) => ({ ...prev, 25: true }))
+      : setLetterBg((prev) => ({ ...prev, 25: false }))
+    letterBorder.includes(26)
+      ? setLetterBg((prev) => ({ ...prev, 26: true }))
+      : setLetterBg((prev) => ({ ...prev, 26: false }))
+    letterBorder.includes(27)
+      ? setLetterBg((prev) => ({ ...prev, 27: true }))
+      : setLetterBg((prev) => ({ ...prev, 27: false }))
+    letterBorder.includes(28)
+      ? setLetterBg((prev) => ({ ...prev, 28: true }))
+      : setLetterBg((prev) => ({ ...prev, 28: false }))
+    letterBorder.includes(29)
+      ? setLetterBg((prev) => ({ ...prev, 29: true }))
+      : setLetterBg((prev) => ({ ...prev, 29: false }))
+    letterBorder.includes(30)
+      ? setLetterBg((prev) => ({ ...prev, 30: true }))
+      : setLetterBg((prev) => ({ ...prev, 30: false }))
+    letterBorder.includes(31)
+      ? setLetterBg((prev) => ({ ...prev, 31: true }))
+      : setLetterBg((prev) => ({ ...prev, 31: false }))
+    letterBorder.includes(32)
+      ? setLetterBg((prev) => ({ ...prev, 32: true }))
+      : setLetterBg((prev) => ({ ...prev, 32: false }))
+    letterBorder.includes(33)
+      ? setLetterBg((prev) => ({ ...prev, 33: true }))
+      : setLetterBg((prev) => ({ ...prev, 33: false }))
+    letterBorder.includes(34)
+      ? setLetterBg((prev) => ({ ...prev, 34: true }))
+      : setLetterBg((prev) => ({ ...prev, 34: false }))
+    letterBorder.includes(35)
+      ? setLetterBg((prev) => ({ ...prev, 35: true }))
+      : setLetterBg((prev) => ({ ...prev, 35: false }))
+  }, [letterBorder])
+
   return (
     <div>
       <div className="">
@@ -575,16 +732,27 @@ export default function Home() {
             <div className="game-board">
               <div className="box">
                 {/* frist letter */}
-                <div className="letter">{randomWord[0]}</div>
+                <div
+                  className="letter"
+                  style={
+                    letterBg[0] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : { backgroundColor: '#7efa82' }
+                  }
+                >
+                  {randomWord[0]}
+                </div>
               </div>
               <div className="box">
                 <div>
                   {/* two letter */}
                   <input
                     style={
-                      oneStyle === true
+                      letterBg[1] === true
+                        ? { backgroundColor: '#d3d3d3' }
+                        : oneStyle === true
                         ? { backgroundColor: '#7efa82' }
-                        : { color: 'red' }
+                        : { backgroundColor: '#ffffff' }
                     }
                     id="1"
                     type="text"
@@ -601,9 +769,11 @@ export default function Home() {
                 {/* three letter */}
                 <input
                   style={
-                    oneStyle === true
+                    letterBg[2] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : oneStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="2"
                   type="text"
@@ -620,9 +790,11 @@ export default function Home() {
                 {/* four letter */}
                 <input
                   style={
-                    oneStyle === true
+                    letterBg[3] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : oneStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="letter"
                   ref={inputRef3}
@@ -638,9 +810,11 @@ export default function Home() {
                 {/* five letter */}
                 <input
                   style={
-                    oneStyle === true
+                    letterBg[4] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : oneStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="letter"
                   ref={inputRef4}
@@ -656,9 +830,11 @@ export default function Home() {
                 {/* six letter */}
                 <input
                   style={
-                    oneStyle === true
+                    letterBg[5] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : oneStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="letter"
                   ref={inputRef5}
@@ -672,15 +848,26 @@ export default function Home() {
               </div>
               <div className="box">
                 {/* seven letter */}
-                <div className="letter">{randomWord[1]}</div>
+                <div
+                  className="letter"
+                  style={
+                    letterBg[6] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : { backgroundColor: '#7efa82' }
+                  }
+                >
+                  {randomWord[1]}
+                </div>
               </div>
               <div className="box">
                 {/* eight letter */}
                 <input
                   style={
-                    twoStyle === true
+                    letterBg[7] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : twoStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="letter"
                   ref={inputRef7}
@@ -696,9 +883,11 @@ export default function Home() {
                 {/* nine letter */}
                 <input
                   style={
-                    twoStyle === true
+                    letterBg[8] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : twoStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="letter"
                   ref={inputRef8}
@@ -714,9 +903,11 @@ export default function Home() {
                 {/* tenth letter */}
                 <input
                   style={
-                    twoStyle === true
+                    letterBg[9] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : twoStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="letter"
                   ref={inputRef9}
@@ -732,9 +923,11 @@ export default function Home() {
                 {/* eleventh letter */}
                 <input
                   style={
-                    twoStyle === true
+                    letterBg[10] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : twoStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="letter"
                   ref={inputRef10}
@@ -750,9 +943,11 @@ export default function Home() {
                 {/* 12 letter */}
                 <input
                   style={
-                    twoStyle === true
+                    letterBg[11] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : twoStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="letter"
                   ref={inputRef11}
@@ -766,15 +961,26 @@ export default function Home() {
               </div>
               <div className="box">
                 {/* 13 letter */}
-                <div className="letter">{randomWord[2]}</div>
+                <div
+                  className="letter"
+                  style={
+                    letterBg[12] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : { backgroundColor: '#7efa82' }
+                  }
+                >
+                  {randomWord[2]}
+                </div>
               </div>
               <div className="box">
                 {/* 14 letter */}
                 <input
                   style={
-                    threeStyle === true
+                    letterBg[13] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : threeStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   ref={inputRef13}
                   id="letter"
@@ -790,9 +996,11 @@ export default function Home() {
                 {/* 15 letter */}
                 <input
                   style={
-                    threeStyle === true
+                    letterBg[14] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : threeStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="letter"
                   ref={inputRef14}
@@ -808,9 +1016,11 @@ export default function Home() {
                 {/* 16 letter */}
                 <input
                   style={
-                    threeStyle === true
+                    letterBg[15] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : threeStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="letter"
                   ref={inputRef15}
@@ -826,9 +1036,11 @@ export default function Home() {
                 {/* 17 letter */}
                 <input
                   style={
-                    threeStyle === true
+                    letterBg[16] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : threeStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="letter"
                   ref={inputRef16}
@@ -844,9 +1056,11 @@ export default function Home() {
                 {/* 18 letter */}
                 <input
                   style={
-                    threeStyle === true
+                    letterBg[17] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : threeStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="letter"
                   ref={inputRef17}
@@ -860,15 +1074,26 @@ export default function Home() {
               </div>
               <div className="box">
                 {/* 19 letter */}
-                <div className="letter">{randomWord[3]}</div>
+                <div
+                  className="letter"
+                  style={
+                    letterBg[18] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : { backgroundColor: '#7efa82' }
+                  }
+                >
+                  {randomWord[3]}
+                </div>
               </div>
               <div className="box">
                 {/* 20 letter */}
                 <input
                   style={
-                    fourStyle === true
+                    letterBg[19] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : fourStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="letter"
                   ref={inputRef19}
@@ -884,9 +1109,11 @@ export default function Home() {
                 {/* 21 letter */}
                 <input
                   style={
-                    fourStyle === true
+                    letterBg[20] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : fourStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="letter"
                   ref={inputRef20}
@@ -902,9 +1129,11 @@ export default function Home() {
                 {/* 22 letter */}
                 <input
                   style={
-                    fourStyle === true
+                    letterBg[21] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : fourStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="letter"
                   ref={inputRef21}
@@ -920,9 +1149,11 @@ export default function Home() {
                 {/* 23 letter */}
                 <input
                   style={
-                    fourStyle === true
+                    letterBg[22] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : fourStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="letter"
                   ref={inputRef22}
@@ -938,9 +1169,11 @@ export default function Home() {
                 {/* 24 letter */}
                 <input
                   style={
-                    fourStyle === true
+                    letterBg[23] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : fourStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="letter"
                   ref={inputRef23}
@@ -954,15 +1187,26 @@ export default function Home() {
               </div>
               <div className="box">
                 {/* 25 letter */}
-                <div className="letter">{randomWord[4]}</div>
+                <div
+                  className="letter"
+                  style={
+                    letterBg[24] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : { backgroundColor: '#7efa82' }
+                  }
+                >
+                  {randomWord[4]}
+                </div>
               </div>
               <div className="box">
                 {/* 26 letter */}
                 <input
                   style={
-                    fiveStyle === true
+                    letterBg[25] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : fiveStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="letter"
                   ref={inputRef25}
@@ -978,9 +1222,11 @@ export default function Home() {
                 {/* 27 letter */}
                 <input
                   style={
-                    fiveStyle === true
+                    letterBg[26] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : fiveStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="letter"
                   ref={inputRef26}
@@ -996,9 +1242,11 @@ export default function Home() {
                 {/* 28 letter */}
                 <input
                   style={
-                    fiveStyle === true
+                    letterBg[27] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : fiveStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="letter"
                   ref={inputRef27}
@@ -1014,9 +1262,11 @@ export default function Home() {
                 {/* 29 letter */}
                 <input
                   style={
-                    fiveStyle === true
+                    letterBg[28] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : fiveStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="letter"
                   ref={inputRef28}
@@ -1032,9 +1282,11 @@ export default function Home() {
                 {/* 30 letter */}
                 <input
                   style={
-                    fiveStyle === true
+                    letterBg[29] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : fiveStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="letter"
                   ref={inputRef29}
@@ -1048,15 +1300,26 @@ export default function Home() {
               </div>
               <div className="box">
                 {/* 31 letter */}
-                <div className="letter">{randomWord[5]}</div>
+                <div
+                  className="letter"
+                  style={
+                    letterBg[30] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : { backgroundColor: '#7efa82' }
+                  }
+                >
+                  {randomWord[5]}
+                </div>
               </div>
               <div className="box">
                 {/* 32 letter */}
                 <input
                   style={
-                    sixStyle === true
+                    letterBg[31] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : sixStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="letter"
                   ref={inputRef31}
@@ -1072,9 +1335,11 @@ export default function Home() {
                 {/* 33 letter */}
                 <input
                   style={
-                    sixStyle === true
+                    letterBg[32] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : sixStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="letter"
                   ref={inputRef32}
@@ -1090,9 +1355,11 @@ export default function Home() {
                 {/* 34 letter */}
                 <input
                   style={
-                    sixStyle === true
+                    letterBg[33] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : sixStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="letter"
                   ref={inputRef33}
@@ -1108,9 +1375,11 @@ export default function Home() {
                 {/* 35 letter */}
                 <input
                   style={
-                    sixStyle === true
+                    letterBg[34] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : sixStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="letter"
                   ref={inputRef34}
@@ -1126,9 +1395,11 @@ export default function Home() {
                 {/* 36 letter */}
                 <input
                   style={
-                    sixStyle === true
+                    letterBg[35] === true
+                      ? { backgroundColor: '#d3d3d3' }
+                      : sixStyle === true
                       ? { backgroundColor: '#7efa82' }
-                      : { color: 'red' }
+                      : { backgroundColor: '#ffffff' }
                   }
                   id="letter"
                   ref={inputRef35}

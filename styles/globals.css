@@ -164,9 +164,9 @@ a {
  }
 
  .box {
-  background-color:  #7efa82;
+  /* background-color:  #7efa82; */
   border: 1px solid lightgrey;
- 
+  background-color:  #7efa82;
   text-align: center;
  position:relative;
  width:100%;
@@ -191,6 +191,7 @@ a {
 
 
  .letter {
+  
   /* margin-top: 1rem; */
   font-size: 2rem;
   /* line-height: 80px; */
@@ -253,7 +254,7 @@ input[type=text]{
  .rules-container {
   display: grid;
   justify-content: center;
-  border: 1px solid lightgrey;
+  border: 1px solid #d3d3d3;
   width: 480px;
   font-size: 10px;
   color: grey;
@@ -266,7 +267,7 @@ input[type=text]{
 
   
   background-color: #c4c4c4;
-  color: #fff;
+  color: #ffffff;
   border-radius: 4px;
   height: 28px;
   width: 70px;
