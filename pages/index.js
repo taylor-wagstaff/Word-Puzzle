@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 import { useEffect, useState, useRef } from 'react'
 
@@ -24,6 +25,7 @@ function getWords(param) {
 // if letter is entered tab across (done)
 // Random word each date (done)
 
+// fix Caps lock in input.
 // change colour if letters go in certain directions
 // add directions for gameplay
 // styling, webpage grid, logo
@@ -251,8 +253,6 @@ export default function Home() {
 
       setScore(fetchScore[0])
       setLetterBorder(fetchScore[1])
-
-     
     }
   }
 
@@ -449,8 +449,6 @@ export default function Home() {
 
       setScore(fetchScore[0])
       setLetterBorder(fetchScore[1])
-
-    
 
       setBackspace(true)
       setLetter(letter)
@@ -698,12 +696,22 @@ export default function Home() {
     <div>
       <div className="">
         <Head>
-          <title>Across It</title>
-          <meta name="Across It" />
+          <title>Acrossit</title>
+          <meta name="Acrossit" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <div className="quote">
-          <p>Todays word is {displayWord}</p>
+          <seciton>
+            <Link href="/play" style={{ textDecoration: 'underline', color: 'blue' }}>
+              <p>How to Play?</p>
+            </Link>
+          </seciton>
+          <section>
+            <p>/</p>
+          </section>
+          <seciton>
+            <p>Todays word is {displayWord}</p>
+          </seciton>
         </div>
 
         <div className="container">

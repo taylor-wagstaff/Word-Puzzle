@@ -352,6 +352,7 @@ export const WORDS = [
   'BEASTS',
   'SPRAWL',
   'ARISES',
+  'EMERGE',
   'HIDDEN',
   'ENRICH',
   'DREADS',

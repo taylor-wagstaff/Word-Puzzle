@@ -643,14 +643,21 @@ export function connects(letters) {
   })
 
   letterValues.map((x, i) => {
-    // letter values is "s"
+    // letter values is ['c']
     newArr.map((y, index) => {
-      // if "s" equal y consectively push the index at where it occurs.
+      // if "c" equal y consectively push the index at where it occurs.
+      // newarr (6) ['a', '$', 'a', 'a', 'a', 'a']
       if (x === y) {
         letterMap.push(index)
       }
     })
   })
+
+  // if letter map contain consective numbers push to new..
+
+  const test = []
+
+  letterMap.map((x) => test.push(x === x + 1))
 
   letterMap.map((x, i) => {
     dir1.map((y, index) => {
@@ -660,8 +667,9 @@ export function connects(letters) {
     })
   })
 
-  console.log('newarr', newArr)
-  console.log('letterMap', letterMap)
+  // console.log('newarr', newArr)
+  // console.log('letterMap', letterMap)
+  console.log('test', test)
 
   console.log('directionValues', directionValues)
 
@@ -989,7 +997,6 @@ export function connects(letters) {
       }
     })
   })
-  console.log('directionValues', directionValues)
 
   ////////////////////////////////
 
