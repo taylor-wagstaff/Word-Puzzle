@@ -737,7 +737,7 @@ export default function Home() {
           <div className="game-container">
             <div className="game-items">
               <div className="score">
-                <p>score: {score}</p>
+                <p>Points: {score}</p>
               </div>
             </div>
 

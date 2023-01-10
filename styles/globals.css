@@ -223,19 +223,24 @@ input[type=text]{
   font-family: 'Computer Modern Sans';
   font-size: 0.9rem;
   color: grey;
-  margin-top: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   background-color: #ffffff;
- 
-  /* border: 5px;
-  border-style: outset; */
-  width: 8rem;
-  height: 3rem;
-  color: grey;
   
+
+
+
+  color: rgb(166, 166, 166);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
  
+  display: flex;
+  justify-content: center;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
+  
   
 
  }
@@ -311,6 +316,7 @@ input[type=text]{
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   justify-items: center;
+  align-items: center;
 
   border: 1px solid #d3d3d3;
  }
@@ -320,6 +326,7 @@ input[type=text]{
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
   justify-items: center;
+  align-items: center;
 
   border: 1px solid #d3d3d3;
  }
@@ -329,6 +336,7 @@ input[type=text]{
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
   justify-items: center;
+  align-items: center;
 
   border: 1px solid #d3d3d3;
  }
@@ -339,6 +347,7 @@ input[type=text]{
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   justify-items: center;
+  align-items: center;
 
   border: 1px solid #d3d3d3;
  }
@@ -347,6 +356,7 @@ input[type=text]{
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   justify-items: center;
+  align-items: center;
 
   border: 1px solid #d3d3d3;
  }
