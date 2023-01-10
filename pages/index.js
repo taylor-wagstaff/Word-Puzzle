@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
-import styles from '../styles/Home.module.css'
+
 import { useEffect, useState, useRef } from 'react'
 
 import { WORDS } from '../components/wordlist'
@@ -24,12 +24,12 @@ function getWords(param) {
 // add points based on letter values to a point summary (done)
 // if letter is entered tab across (done)
 // Random word each date (done)
+// add directions for gameplay (Done)
+// styling, webpage grid, logo (Done)
 
-// fix Caps lock in input.
-// change colour if letters go in certain directions
-// add directions for gameplay
-// styling, webpage grid, logo
+// change colour if letters go in certain directions (Bug fix)
 // make only letters in input (unresolved)
+// Fix react state for mobile (unresolved)
 
 export default function Home() {
   const [randomWord, setRandomWord] = useState([])
@@ -702,15 +702,19 @@ export default function Home() {
         </Head>
         <div className="quote">
           <seciton>
-            <Link href="/play" style={{ textDecoration: 'underline', color: 'blue' }}>
+            <Link
+              href="/play"
+              style={{ textDecoration: 'underline', color: 'blue' }}
+            >
               <p>How to Play?</p>
             </Link>
           </seciton>
-          <section>
-            <p>/</p>
-          </section>
+
           <seciton>
-            <p>Todays word is {displayWord}</p>
+            <p>/ Todays word is {displayWord}</p>
+          </seciton>
+          <seciton>
+            <p>* This game is only available on Desktop</p>
           </seciton>
         </div>
 
@@ -1430,13 +1434,7 @@ export default function Home() {
             </a>
           </div>
         </div>
-        <div className="quote">
-          <p>
-            <em>
-              &quot;God is a DJ, life is a dancefloor, love is the rhythm.&quot;
-            </em>
-          </p>
-        </div>
+        <div className="footer"></div>
       </div>
     </div>
   )

@@ -64,6 +64,11 @@ a {
   text-decoration: none;
 }
 
+p{
+
+  margin: 0;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -120,6 +125,7 @@ a {
   font-size: 1.5rem;
   font-family:'Computer Modern Sans';
   align-self: center;
+  margin-top: 2rem;
   
   
 
@@ -190,7 +196,7 @@ a {
 
 .logo {
   
-  margin-top: 1rem;
+  margin-top: 3rem;
 }
 
  input {
@@ -240,6 +246,8 @@ input[type=text]{
   display: flex;
   flex-direction: row;
   gap: 1rem;
+
+
  }
 
  .rules-container {
@@ -281,11 +289,6 @@ input[type=text]{
 
 /* How to play  */
 
-
-
-
-
-
 .play-container {
   
   display: grid;
@@ -300,6 +303,8 @@ input[type=text]{
   border-style: outset;
 
  }
+
+ 
 
  .rule1{
   display: grid;
@@ -348,6 +353,7 @@ input[type=text]{
 
  .direction {
   place-items: center;
+  justify-items: start;
 
   border: 1px solid #d3d3d3;
 
@@ -358,3 +364,10 @@ input[type=text]{
 
   margin-top: 2rem;
  }
+
+ .footer {
+  text-align: center;
+  background-color: #eeeeee;
+  height: 100px;
+ }
+
