@@ -1432,9 +1432,22 @@ export default function Home() {
             >
               Tweet
             </a>
+            
           </div>
+        <div className="footer">
+        <div  style={{ textDecoration: 'underline', color: 'blue', marginBottom: '8px' }}>Skill Level:</div>
+        <p>15+ Younglings</p>
+        <p>45+ Initiates</p>
+        <p>80+ Knight</p>
+        <p>100+ Master</p>
+        <p>145+ Grand Master</p>
+
+
+
+
+     
         </div>
-        <div className="footer"></div>
+        </div>
       </div>
     </div>
   )
