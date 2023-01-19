@@ -1,11 +1,9 @@
    <!-- public/sitemap.xml -->
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
-        <loc>https://www.acrossit.co.nz/</loc>
-    </url>
-    <url>
-        <loc>https://www.acrossit.co.nz/play</loc>
-    </url>
-   
-</urlset>
+   <xml version="1.0" encoding="UTF-8">
+   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+     <url>
+       <loc>http://www.acrossit.co.nz/</loc>
+      
+     </url>
+   </urlset>
+   </xml>
