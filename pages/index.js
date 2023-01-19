@@ -7,6 +7,7 @@ import { useEffect, useState, useRef } from 'react'
 import { WORDS } from '../components/wordlist'
 import { fetchWords } from './api/dictionary'
 import { connects } from '../components/connects'
+import { loadGetInitialProps } from 'next/dist/shared/lib/utils'
 
 const getRandomWords = () => {
   return WORDS[Math.floor(Math.random() * WORDS.length)]
@@ -125,7 +126,7 @@ export default function Home() {
     34: false,
     35: false,
   })
-
+  const [loading, setLoading] = useState(false)
   const [letter, setLetter] = useState([
     '',
     '',
@@ -164,8 +165,10 @@ export default function Home() {
     '',
     '',
   ])
+
   // Daily word
   useEffect(() => {
+    setLoading(true)
     const day = []
 
     // for today
@@ -229,10 +232,11 @@ export default function Home() {
     sliceIntoChunks(letter)
     colorCheck(letter)
     setStart(true)
+
     const fetchScore = connects(letter)
     setScore(fetchScore[0])
     setLetterBorder(fetchScore[1])
-  }, [])
+  }, [loading])
 
   // Add letter to the array
   const handleChange = (event, param1) => {
@@ -540,6 +544,7 @@ export default function Home() {
   }, [start, backspace])
 
   function colorCheck(letter) {
+    console.log('color', letter)
     const empty = ''
 
     const word1 = letter.slice(1, 6)
@@ -1428,25 +1433,27 @@ export default function Home() {
           <div className="button-container">
             <a
               className="tweetbutton"
-              href={`https://twitter.com/intent/tweet?text=${words}%20%28Score:%20${score}%29`}
+              href={`https://twitter.com/intent/tweet?text=${words}%20%28Score:%20${score}%29%20%28www.acrossit.co.nz%29`}
             >
               Tweet
             </a>
-            
           </div>
-        <div className="footer">
-        <div  style={{ textDecoration: 'underline', color: 'blue', marginBottom: '8px' }}>Skill Level:</div>
-        <p>15+ Younglings</p>
-        <p>45+ Initiates</p>
-        <p>80+ Knight</p>
-        <p>100+ Master</p>
-        <p>145+ Grand Master</p>
-
-
-
-
-     
-        </div>
+          <div className="footer">
+            <div
+              style={{
+                textDecoration: 'underline',
+                color: 'blue',
+                marginBottom: '8px',
+              }}
+            >
+              Skill Level:
+            </div>
+            <p>15+ Younglings</p>
+            <p>45+ Initiates</p>
+            <p>80+ Knight</p>
+            <p>100+ Master</p>
+            <p>145+ Grand Master</p>
+          </div>
         </div>
       </div>
     </div>

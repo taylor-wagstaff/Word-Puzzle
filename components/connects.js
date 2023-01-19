@@ -669,9 +669,6 @@ export function connects(letters) {
 
   // console.log('newarr', newArr)
   // console.log('letterMap', letterMap)
-  console.log('test', test)
-
-  console.log('directionValues', directionValues)
 
   //////////////////////////
   //////////////////////////
