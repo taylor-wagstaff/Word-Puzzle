@@ -7,7 +7,6 @@ import { useEffect, useState, useRef } from 'react'
 import { WORDS } from '../components/wordlist'
 import { fetchWords } from './api/dictionary'
 import { connects } from '../components/connects'
-import { loadGetInitialProps } from 'next/dist/shared/lib/utils'
 
 const getRandomWords = () => {
   return WORDS[Math.floor(Math.random() * WORDS.length)]
@@ -701,8 +700,11 @@ export default function Home() {
     <div>
       <div className="">
         <Head>
-          <title>Acrossit</title>
-          <meta name="Acrossit" />
+          <title>Acrossit - New Zealands new word game.</title>
+          <meta
+            name="Description"
+            content="Play Acrossit, New Zealand's new word game. Get points and share with your friends."
+          />
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <div className="quote">
