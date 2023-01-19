@@ -1,0 +1,9 @@
+   <!-- public/sitemap.xml -->
+   <xml version="1.0" encoding="UTF-8">
+   <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+     <url>
+       <loc>http://www.acrossit.co.nz</loc>
+       <lastmod>2023-19-01</lastmod>
+     </url>
+   </urlset>
+   </xml>
