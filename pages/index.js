@@ -700,10 +700,10 @@ export default function Home() {
     <div>
       <div className="">
         <Head>
-          <title>Acrossit - New Zealands new word game.</title>
+          <title>Acrossit | New Zealand&apos;s New Word Game.</title>
           <meta
             name="Description"
-            content="Play Acrossit, New Zealand's new word game. Get points and share with your friends."
+            content="Play Acrossit, New Zealand's new acrostic word game. Get points by matching letters diagonally and share your results. Acrossit is a creative, fun and strategic word game and designed for those who love to find words."
           />
           <link rel="icon" href="/favicon.ico" />
         </Head>
