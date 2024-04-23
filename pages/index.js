@@ -16,7 +16,7 @@ function getWords(param) {
 }
 
 // To do:
-
+// update to check
 // check each word with api from parts of array after each handlechange (done)
 // change colour if word is correct (done)
 // Fix first word has to be different (done)
